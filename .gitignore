@@ -7,5 +7,6 @@ node_modules
 build
 
 # misc
+.idea
 .DS_Store
 npm-debug.log
