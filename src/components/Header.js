@@ -4,10 +4,10 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 class Header extends Component {
     render() {
         return (
-            <Navbar inverse>
+            <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">React-Bootstrap</a>
+                        <a href="#">Tival Admin</a>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
@@ -23,12 +23,12 @@ class Header extends Component {
                             <MenuItem eventKey={3.3}>Separated link</MenuItem>
                         </NavDropdown>
                     </Nav>
-                <Nav pullRight>
-                    <NavItem eventKey={1} href="#">Link Right</NavItem>
-                    <NavItem eventKey={2} href="#">Link Right</NavItem>
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
+                    <Nav pullRight>
+                        <NavItem eventKey={1} href="#">Link Right</NavItem>
+                        <NavItem eventKey={2} href="#">Link Right</NavItem>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         );
     }
 }
