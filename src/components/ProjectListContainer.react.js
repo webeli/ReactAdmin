@@ -7,12 +7,17 @@ class ProjectListContainer extends Component {
     componentWillMount() {
         this.data = [];
         this.dbRef = firebase.database().ref();
-        this.dbRef.on('child_added', (snap) => {
-            this.data.push({key:snap.key,val:snap.val()});
-            this.setState({
-                data: this.data
-            });
+        this.dbRef.on('value', (snap) => {
+            this.data = this.createArray(snap);
+            this.setState({ data: this.data });
         }).bind(this);
+    }
+    createArray(snap) {
+        let array = [];
+        Object.keys(snap.val()).forEach(key => {
+            array.push({key:key,val:snap.val()[key]})
+        });
+        return array;
     }
 
     render() {

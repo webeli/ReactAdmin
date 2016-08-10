@@ -9,7 +9,7 @@ class ProjectList extends Component {
             return (
                 <Col key={project.key} xs={12} md={4}>
                     <Thumbnail src="https://react-bootstrap.github.io/assets/thumbnaildiv.png" alt="242x200">
-                        <h3>{project.pName}</h3>
+                        <h3>{project.val.pName}</h3>
                         <p>Description</p>
                         <p>
                             <Button bsStyle="primary">Edit</Button>&nbsp;
