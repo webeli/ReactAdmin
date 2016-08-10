@@ -8,7 +8,7 @@ class ProjectList extends Component {
         let projectList = this.props.data.map(project => {
             return (
                 <Col key={project.key} xs={12} md={4}>
-                    <Thumbnail src="https://react-bootstrap.github.io/assets/thumbnaildiv.png" alt="242x200">
+                    <Thumbnail src="https://s-media-cache-ak0.pinimg.com/564x/cd/05/0a/cd050aa0ef2b25c93249e0a25857d222.jpg" alt="242x200">
                         <h3>{project.val.pName}</h3>
                         <p>Description</p>
                         <p>
