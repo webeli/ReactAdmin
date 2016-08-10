@@ -11,16 +11,7 @@ class App extends Component {
     return (
         <div>
           <Header />
-          <Grid>
-            <Row className="show-grid">
-              <Col xs={4} md={4}>
-                <Menu />
-              </Col>
-              <Col xs={8} md={8}>
-                <Content />
-              </Col>
-            </Row>
-          </Grid>
+          <Content/>
         </div>
     );
   }
