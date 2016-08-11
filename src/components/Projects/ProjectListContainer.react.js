@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ProjectList from './ProjectList.react';
+import ProjectList from './ProjectList.react.js';
 import * as firebase from 'firebase';
-import { createArray } from '../lib/helpers';
+import { createArray } from '../../lib/helpers';
 
 class ProjectListContainer extends Component {
 
