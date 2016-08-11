@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Thumbnail, Button } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 class ProjectList extends Component {
 
@@ -12,7 +13,7 @@ class ProjectList extends Component {
                         <h3>{project.val.pName}</h3>
                         <p>Description</p>
                         <p>
-                            <Button bsStyle="primary">Edit</Button>&nbsp;
+                            <Link to={`/editproject/${project.key}`}><Button bsStyle="primary">Edit</Button></Link>&nbsp;
                             <Button bsStyle="default">Open</Button>
                         </p>
                     </Thumbnail>

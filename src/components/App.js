@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 import './../styles/App.css';
 import Projects from './Projects/Projects';
 import EditProject from './EditProject/EditProject'
