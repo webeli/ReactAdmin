@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Header from '../Header';
+import ProjectContainer from './ProjectContainer.react'
 
 class EditProject extends Component {
+
     render() {
-        console.log(this.props);
         return (
             <div>
                 <Header />
+                <ProjectContainer projectKey={this.props.routeParams.projectKey} />
             </div>
         );
     }

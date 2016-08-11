@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import ProjectList from './ProjectList.react.js';
+import Project from './Project.react.js';
 import * as firebase from 'firebase';
-import { createArray } from '../../lib/helpers';
+//import { createArray } from '../../lib/helpers';
 
-class ProjectListContainer extends Component {
+class ProjectContainer extends Component {
 
     componentWillMount() {
         this.data = [];
-        this.dbRef = firebase.database().ref();
+        this.dbRef = firebase.database().ref(this.props.projectKey);
         this.dbRef.on('value', (snap) => {
-            this.data = createArray(snap);
+            this.data = snap.val();
             this.setState({ data: this.data });
         }).bind(this);
     }
@@ -20,9 +20,9 @@ class ProjectListContainer extends Component {
 
     render() {
         return (
-            <ProjectList data={this.data} />
+            <Project project={this.data}/>
         );
     }
 }
 
-export default ProjectListContainer;
+export default ProjectContainer;
