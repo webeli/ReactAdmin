@@ -7,9 +7,11 @@ class Project extends Component {
     render() {
         console.log(this.props);
         return (
+
             <Grid>
                 <Row className="show-grid">
                     <h2>{this.props.project.pName}</h2>
+                    <p>{this.props.project.deadline}</p>
                 </Row>
             </Grid>
         );
