@@ -5,3 +5,13 @@ export function createArray(snap) {
     });
     return array;
 }
+
+export function getByKeys(dbRef, keys) {
+    let array = [];
+    Object.keys(keys).map(key => {
+        dbRef.child(key).once('value', (snap) => {
+            array.push(snap.val());
+        })
+    });
+    return array;
+}

@@ -18,7 +18,7 @@ class Project extends Component {
                         <br />
                     </Col>
                     <Col xs={12} md={6}>
-                        <CategoryList categories={this.props.project.categories}/>
+                        <CategoryList projectKey={this.props.projectKey} categories={this.props.project.categories}/>
                     </Col>
                     <Col xs={12} md={6}>
                         <Panel header="OptionList">

@@ -20,7 +20,7 @@ class ProjectContainer extends Component {
 
     render() {
         return (
-            <Project project={this.data}/>
+            <Project projectKey={this.props.projectKey} project={this.data}/>
         );
     }
 }
