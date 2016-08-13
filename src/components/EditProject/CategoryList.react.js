@@ -5,7 +5,6 @@ import ItemList from './ItemList.react';
 class CategoryList extends Component {
 
     render() {
-        console.log(this.props);
         let categoryList = null;
         let categories = this.props.categories;
         if (categories) {
@@ -18,9 +17,9 @@ class CategoryList extends Component {
             });
         }
         return (
-            <Accordion>
+            <div>
                 {categoryList}
-            </Accordion>
+            </div>
         );
     }
 }
