@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Project from './Project.react.js';
 import * as firebase from 'firebase';
-//import { createArray } from '../../lib/helpers';
+import store from '../../store';
+import { getByKeys } from '../../lib/helpers';
 
 class ProjectContainer extends Component {
 
@@ -12,6 +13,18 @@ class ProjectContainer extends Component {
             this.data = snap.val();
             this.setState({ data: this.data });
         }).bind(this);
+
+        store.subscribe(() => {
+            console.log("store changed", store.getState())
+            var getState = store.getState();
+            var itemKey = getState.options.key;
+            this.optionRefs = this.data.categoryItems[itemKey].refs;
+            console.log("ref: ", this.optionRefs);
+            this.options = getByKeys(this.dbRef.child('itemOptions'), this.optionRefs);
+            this.setState({ options: this.options });
+            console.log(this.options);
+            //console.log(optionRefs);
+        });
     }
 
     componentWillUnmount() {
@@ -19,8 +32,9 @@ class ProjectContainer extends Component {
     }
 
     render() {
+        console.log(store.getState());
         return (
-            <Project projectKey={this.props.projectKey} project={this.data}/>
+            <Project projectKey={this.props.projectKey} project={this.data} options={this.options}/>
         );
     }
 }

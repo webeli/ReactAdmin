@@ -6,7 +6,7 @@ import store from '../../store';
 
 class ItemList extends Component {
     getItemOptions(x) {
-        store.dispatch({type: "CHANGE_OPTIONS", payload: x})
+        store.dispatch({type: "CHANGE_OPTION_KEY", payload: x})
     }
 
     render() {

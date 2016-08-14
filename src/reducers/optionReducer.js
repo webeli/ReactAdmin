@@ -1,7 +1,7 @@
 export default function reducer(state={}, action) {
     switch(action.type) {
-        case "CHANGE_OPTIONS": {
-            state = {...state, name: action.payload};
+        case "CHANGE_OPTION_KEY": {
+            state = {...state, key: action.payload};
             break;
         }
     }

@@ -4,14 +4,14 @@ import { Panel } from 'react-bootstrap';
 class OptionList extends Component {
 
     render() {
-        console.log(this.props);
+        console.log("optionProps:", this.props);
         let optionList = null;
         let options = this.props.options;
         if (options) {
-            optionList = Object.keys(options).map(category => {
+            optionList = Object.keys(options).map(option => {
                 return (
-                    <Panel key={category} header={options[category].title} eventKey={category}>
-                        <ItemList projectKey={this.props.projectKey} items={options[category].refs} />
+                    <Panel key={option} header={options[option].val.title} eventKey={option}>
+                        <p>{options[option].val.title}</p>
                     </Panel>
                 )
             });
