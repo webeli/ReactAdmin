@@ -18,12 +18,13 @@ class ProjectContainer extends Component {
             console.log("store changed", store.getState())
             var getState = store.getState();
             var itemKey = getState.options.key;
-            this.optionRefs = this.data.categoryItems[itemKey].refs;
-            console.log("ref: ", this.optionRefs);
-            this.options = getByKeys(this.dbRef.child('itemOptions'), this.optionRefs);
-            this.setState({ options: this.options });
-            console.log(this.options);
-            //console.log(optionRefs);
+            this.optionsRef =  this.dbRef.child('itemOptions');
+            var itemOptionsRefs = this.dbRef.child('categoryItems').child(itemKey).child('refs');
+            itemOptionsRefs.on('value', (snap) => {
+                this.options = getByKeys(this.optionsRef, snap.val());
+                this.setState({ options: this.options });
+            }).bind(this);
+
         });
     }
 
