@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroupItem, ListGroup } from 'react-bootstrap';
+import { ListGroupItem } from 'react-bootstrap';
 import * as firebase from 'firebase';
 import { getByKeys } from '../../lib/helpers';
 

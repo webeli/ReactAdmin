@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Accordion, Panel } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import ItemList from './ItemList.react';
 
 class CategoryList extends Component {

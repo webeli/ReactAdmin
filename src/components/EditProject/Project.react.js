@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import CategoryList from './CategoryList.react';
+import OptionList from './OptionList.react';
 
 class Project extends Component {
 
     render() {
+        console.log(this.props);
         return (
             <Grid>
                 <Row className="show-grid">
@@ -21,9 +23,7 @@ class Project extends Component {
                         <CategoryList projectKey={this.props.projectKey} categories={this.props.project.categories}/>
                     </Col>
                     <Col xs={12} md={6}>
-                        <Panel header="OptionList">
-                            Empty
-                        </Panel>
+                        <OptionList projectKey={this.props.projectKey} options={this.props.options} />
                     </Col>
                 </Row>
             </Grid>
