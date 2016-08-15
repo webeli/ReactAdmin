@@ -8,10 +8,11 @@ import { getByKeys } from '../../lib/helpers';
 
 class ItemList extends Component {
     getItemOptions(key) {
-        this.props.dispatch(optionActions.updateOptionKey(key));
+        this.props.updateOptionKey(key);
     }
 
     render() {
+        console.log("itemlistprops", this.props);
         const dbRef = firebase.database().ref(this.props.projectKey).child('categoryItems');
         let itemArray = getByKeys(dbRef, this.props.items);
         let list = Object.keys(itemArray).map(item => {
@@ -32,5 +33,9 @@ function mapStateToProps(state, ownProps) {
         options: state.options
     };
 }
-
-export default connect(mapStateToProps)(ItemList);
+function mapDispatchToProps(dispatch) {
+    return {
+        updateOptionKey: key => dispatch(optionActions.updateOptionKey(key))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
