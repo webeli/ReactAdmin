@@ -4,7 +4,6 @@ import { Panel } from 'react-bootstrap';
 class OptionList extends Component {
 
     render() {
-        console.log("optionProps:", this.props);
         let optionList = null;
         let options = this.props.options;
         if (options) {
