@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export function createArray(snap) {
     let array = [];
     Object.keys(snap.val()).forEach(key => {
