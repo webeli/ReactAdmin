@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { ListGroupItem } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import * as firebase from 'firebase';
+import * as optionActions from '../../actions/optionActions';
 import { getByKeys } from '../../lib/helpers';
-import store from '../../store';
+
 
 class ItemList extends Component {
-    getItemOptions(x) {
-        store.dispatch({type: "CHANGE_OPTION_KEY", payload: x})
+    getItemOptions(key) {
+        this.props.updateOptionKey(key);
     }
 
     render() {
+        console.log("itemlistprops", this.props);
         const dbRef = firebase.database().ref(this.props.projectKey).child('categoryItems');
         let itemArray = getByKeys(dbRef, this.props.items);
         let list = Object.keys(itemArray).map(item => {
@@ -25,4 +28,14 @@ class ItemList extends Component {
     }
 }
 
-export default ItemList;
+function mapStateToProps(state, ownProps) {
+    return {
+        options: state.options
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        updateOptionKey: key => dispatch(optionActions.updateOptionKey(key))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
