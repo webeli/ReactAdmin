@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Panel, ButtonToolbar, Button } from 'react-bootstrap';
+import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import CategoryList from './CategoryList.react';
 import OptionList from './OptionList.react';
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Project from './Project.react.js';
 import * as firebase from 'firebase';
 import store from '../../store';
+import { connect } from 'react-redux';
 import { getByKeys } from '../../lib/helpers';
 
 class ProjectContainer extends Component {
@@ -40,4 +41,10 @@ class ProjectContainer extends Component {
     }
 }
 
-export default ProjectContainer;
+function mapStateToProps(state, ownProps) {
+    return {
+        options: state.options
+    };
+}
+
+export default connect(mapStateToProps)(ProjectContainer);

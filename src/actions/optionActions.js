@@ -1,8 +1,6 @@
-export function updateOptions() {
+export function updateOptionKey(key) {
     return {
-        type: 'UPDATE_OPTIONS',
-        payload: {
-            name: "Micro 46"
-        }
+        type: 'CHANGE_OPTION_KEY',
+        payload: key
     }
 }
