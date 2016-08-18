@@ -13,7 +13,7 @@ class OptionList extends Component {
                     <Panel key={option} header={options[option].val.title} eventKey={option}>
                         <p>{options[option].val.desc}</p>
                         <p>{options[option].val.price}</p>
-                        <img src={options[option].val.image} height="100px" width="100px" />
+                        <img src={options[option].val.image} height="100px" width="100px" alt={options[option].val.title}/>
                     </Panel>
                 )
             });
