@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 class Project extends Component {
 
     render() {
-        console.log("prop111s", this.props);
         return (
             <Grid>
                 <Row className="show-grid">
