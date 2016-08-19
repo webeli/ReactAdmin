@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class OptionList extends Component {
@@ -14,6 +14,11 @@ class OptionList extends Component {
                         <p>{options[option].desc}</p>
                         <p>{options[option].price}</p>
                         <img src={options[option].image} height="100px" width="100px" alt={options[option].title}/>
+                        <p></p>
+                        <ButtonToolbar>
+                            <Button bsStyle="danger">Delete</Button>
+                            <Button bsStyle="primary">Edit</Button>
+                        </ButtonToolbar>
                     </Panel>
                 )
             });

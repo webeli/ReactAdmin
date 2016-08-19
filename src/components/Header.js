@@ -4,7 +4,7 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 class Header extends Component {
     render() {
         return (
-            <Navbar inverse>
+            <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
                         <a href="#">Tival Admin</a>
