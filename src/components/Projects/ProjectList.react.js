@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Thumbnail, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 class ProjectList extends Component {
 
     render() {
-        let projectList = this.props.data.map(project => {
+        let projects = this.props.projects;
+        let projectList = Object.keys(projects).map(project => {
             return (
-                <Col key={project.key} xs={12} md={4}>
+                <Col key={project} xs={12} md={4}>
                     <Thumbnail src="https://s-media-cache-ak0.pinimg.com/564x/cd/05/0a/cd050aa0ef2b25c93249e0a25857d222.jpg" alt="242x200">
-                        <h3>{project.val.pName}</h3>
+                        <h3>{projects[project].pName}</h3>
                         <p>Description</p>
                         <p>
-                            <Link to={`/editproject/${project.key}`}><Button bsStyle="primary">Edit</Button></Link>&nbsp;
+                            <Link to={`/editproject/${project}`}><Button bsStyle="primary">Edit</Button></Link>&nbsp;
                             <Button bsStyle="default">Open</Button>
                         </p>
                     </Thumbnail>
@@ -30,4 +32,9 @@ class ProjectList extends Component {
     }
 }
 
-export default ProjectList;
+function mapStateToProps(state, ownProps) {
+    return {
+        projects: state.projects
+    };
+}
+export default connect(mapStateToProps)(ProjectList);
