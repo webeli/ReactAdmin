@@ -12,7 +12,6 @@ export function getAllProjects() {
         const dbRef = firebase.database().ref();
         dbRef.on('value', (snap) => {
             const data = snap.val();
-            console.log("getAllProjects:", data);
             dispatch(loadAllProjectsSuccess(data));
         });
     }

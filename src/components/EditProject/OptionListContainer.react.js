@@ -16,7 +16,7 @@ class OptionListContainer extends Component {
         }
 
         return (
-            <OptionList projectKey={this.props.projectKey} options={this.options}/>
+            <OptionList projectKey={this.props.projectKey}/>
         );
     }
 }

@@ -31,10 +31,7 @@ class Project extends Component {
     }
 }
 
-export default Project;
-
 function mapStateToProps(state, ownProps) {
-    console.log(state);
     return {
         project: state.project
     };
