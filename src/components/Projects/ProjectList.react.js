@@ -5,7 +5,6 @@ import { Link } from 'react-router';
 class ProjectList extends Component {
 
     render() {
-        console.log(this.props);
         let projectList = this.props.data.map(project => {
             return (
                 <Col key={project.key} xs={12} md={4}>

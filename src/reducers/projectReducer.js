@@ -1,7 +1,7 @@
 export default function reducer(state={}, action) {
     switch(action.type) {
-        case "CHANGE_PROJECT": {
-            state = {...state, name: action.payload};
+        case "GET_PROJECT_DATA": {
+            state = {...state, ...action.payload};
             return state;
         }
         default:

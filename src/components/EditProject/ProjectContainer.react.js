@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import Project from './Project.react.js';
-import * as firebase from 'firebase';
+import { connect } from 'react-redux';
+import * as projectActions from '../../actions/projectActions';
 
 class ProjectContainer extends Component {
 
     componentWillMount() {
-        this.data = [];
-        this.dbRef = firebase.database().ref(this.props.projectKey);
-        this.dbRef.on('value', (snap) => {
-            this.data = snap.val();
-            this.setState({ data: this.data });
-        }).bind(this);
-    }
-
-    componentWillUnmount() {
-        this.dbRef.off();
+        this.props.getProjectByKey(this.props.projectKey);
     }
 
     render() {
         return (
-            <Project projectKey={this.props.projectKey} project={this.data}/>
+            <Project projectKey={this.props.projectKey}/>
         );
     }
 }
 
-export default ProjectContainer;
+function mapStateToProps(state, ownProps) {
+    return {
+        project: state.project
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        getProjectByKey: key => dispatch(projectActions.getProjectByKey(key))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectContainer);

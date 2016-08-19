@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import CategoryList from './CategoryList.react';
 import OptionListContainer from './OptionListContainer.react';
+import { connect } from 'react-redux';
 
 class Project extends Component {
 
     render() {
+        console.log("prop111s", this.props);
         return (
             <Grid>
                 <Row className="show-grid">
@@ -31,3 +33,11 @@ class Project extends Component {
 }
 
 export default Project;
+
+function mapStateToProps(state, ownProps) {
+    console.log(state);
+    return {
+        project: state.project
+    };
+}
+export default connect(mapStateToProps)(Project);
