@@ -12,7 +12,7 @@ class CategoryList extends Component {
                 return (
                     <Panel key={category} header={categories[category].title} eventKey={category}>
                         <CategoryItemList projectKey={this.props.projectKey} items={categories[category].refs} />
-                        <ListGroupItem bsStyle="info"><b>+</b></ListGroupItem>
+                        <ListGroupItem bsStyle="info" href="#"><b>+ Item</b></ListGroupItem>
                     </Panel>
                 )
             });

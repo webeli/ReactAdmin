@@ -24,7 +24,18 @@ class Project extends Component {
                         <p>{this.props.project.deadline}</p>
                         <ButtonToolbar>
                             <Button onClick={()=>this.setState({ lgShow: true })}>Project Settings</Button>
-                            <Button bsStyle="primary">New Category</Button>
+                        </ButtonToolbar>
+                        <br />
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <ButtonToolbar>
+                            <Button bsStyle="info" bsSize="xsmall">+ Category</Button>
+                        </ButtonToolbar>
+                        <br />
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <ButtonToolbar>
+                            <Button bsStyle="info" bsSize="xsmall">+ Option</Button>
                         </ButtonToolbar>
                         <br />
                     </Col>
