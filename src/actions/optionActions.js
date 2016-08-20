@@ -17,7 +17,11 @@ export function getOptionListByKey(projectKey, itemKey) {
             optionData = [];
             Object.keys(snap.val()).map(key => {
                 optionsRef.child(key).on('value', (snaps) => {
-                    optionData.push({key:key,...snaps.val()});
+                    if (!snaps.val()) {
+                        optionListRefs.child(key).remove();
+                    } else {
+                        optionData.push({key:key,...snaps.val()});
+                    }
                 })
             });
             dispatch(getOptionListSuccess(optionData));
