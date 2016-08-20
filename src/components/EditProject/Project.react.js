@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import CategoryList from './CategoryList.react';
-import OptionListContainer from './OptionListContainer.react';
+import OptionList from './OptionList.react';
 import { connect } from 'react-redux';
 
 class Project extends Component {
@@ -23,7 +23,7 @@ class Project extends Component {
                         <CategoryList projectKey={this.props.projectKey} categories={this.props.project.categories}/>
                     </Col>
                     <Col xs={12} md={6}>
-                        <OptionListContainer projectKey={this.props.projectKey} />
+                        <OptionList />
                     </Col>
                 </Row>
             </Grid>

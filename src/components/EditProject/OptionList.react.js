@@ -16,8 +16,8 @@ class OptionList extends Component {
                         <img src={options[option].image} height="100px" width="100px" alt={options[option].title}/>
                         <p></p>
                         <ButtonToolbar>
-                            <Button bsStyle="danger">Delete</Button>
-                            <Button bsStyle="primary">Edit</Button>
+                            <Button bsSize="small" bsStyle="danger">Delete</Button>
+                            <Button bsSize="small" bsStyle="primary">Edit</Button>
                         </ButtonToolbar>
                     </Panel>
                 )
