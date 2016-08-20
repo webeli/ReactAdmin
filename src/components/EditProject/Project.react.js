@@ -3,18 +3,27 @@ import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import CategoryList from './CategoryList.react';
 import OptionList from './OptionList.react';
 import { connect } from 'react-redux';
+import ModalProjectSettings from './ModalProjectSettings';
 
 class Project extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = { lgShow: false };
+    }
+
     render() {
+        let lgClose = () => this.setState({ lgShow: false });
+
         return (
             <Grid>
+                <ModalProjectSettings show={this.state.lgShow} onHide={lgClose} />
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
                         <h2>{this.props.project.pName}</h2>
                         <p>{this.props.project.deadline}</p>
                         <ButtonToolbar>
-                            <Button>Project Settings</Button>
+                            <Button onClick={()=>this.setState({ lgShow: true })}>Project Settings</Button>
                             <Button bsStyle="primary">New Category</Button>
                         </ButtonToolbar>
                         <br />

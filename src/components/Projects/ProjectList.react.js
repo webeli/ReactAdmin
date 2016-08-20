@@ -14,7 +14,7 @@ class ProjectList extends Component {
                         <h3>{projects[project].pName}</h3>
                         <p>Description</p>
                         <p>
-                            <Link to={`/editproject/${project}`}><Button bsStyle="primary">Configure</Button></Link>&nbsp;
+                            <Link to={`/editproject/${project}`}><Button bsStyle="primary">Manage</Button></Link>&nbsp;
                             <Button bsStyle="default">View</Button>
                         </p>
                     </Thumbnail>
