@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, ListGroupItem } from 'react-bootstrap';
+import { Panel, ListGroupItem, ButtonToolbar, Button } from 'react-bootstrap';
 import CategoryItemList from './CategoryItemList.react';
 
 class CategoryList extends Component {
@@ -11,8 +11,11 @@ class CategoryList extends Component {
             categoryList = Object.keys(categories).map(category => {
                 return (
                     <Panel key={category} header={categories[category].title} eventKey={category}>
+                        <ButtonToolbar>
+                            <Button bsStyle="default" bsSize="xsmall" block>+ ITEM</Button>
+                        </ButtonToolbar>
+                        <br />
                         <CategoryItemList projectKey={this.props.projectKey} items={categories[category].refs} />
-                        <ListGroupItem bsStyle="info" href="#"><b>+ Item</b></ListGroupItem>
                     </Panel>
                 )
             });
