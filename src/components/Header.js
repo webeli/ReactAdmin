@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 class Header extends Component {
     render() {
@@ -7,7 +8,7 @@ class Header extends Component {
             <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">Tival Admin</a>
+                        <Link to={`/`}>Tival Admin</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
