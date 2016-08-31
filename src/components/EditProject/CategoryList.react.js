@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, ListGroupItem, ButtonToolbar, Button } from 'react-bootstrap';
+import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import CategoryItemList from './CategoryItemList.react';
 
 class CategoryList extends Component {

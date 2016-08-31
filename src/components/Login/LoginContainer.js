@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Grid, Button } from 'react-bootstrap';
 import * as authActions from '../../actions/authActions';
 
 class LoginContainer extends Component {
@@ -9,11 +10,10 @@ class LoginContainer extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
-            <div>
-                <button onClick={() => this.loginUser()}>Login</button>
-            </div>
+            <Grid>
+                <Button bsStyle="default" onClick={() => this.loginUser()}>SignIn</Button>
+            </Grid>
         );
     }
 }
@@ -25,7 +25,6 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        checkAuth: () => dispatch(authActions.checkAuth()),
         loginUser: (email, password) => dispatch(authActions.loginUser(email, password))
     }
 }

@@ -28,8 +28,9 @@ class ProjectList extends Component {
 
         return (
             <Grid>
+                <Button bsStyle="default" onClick={() => this.signOut()}>SignOut</Button>
+                <p></p>
                 <Row className="show-grid">
-                    <button onClick={() => this.signOut()}>signOut</button>
                     {projectList}
                 </Row>
             </Grid>
