@@ -7,9 +7,7 @@ class Header extends Component {
         return (
             <Navbar>
                 <Navbar.Header>
-                    <Navbar.Brand>
-                        <Link to={`/login`}>Tival Admin</Link>
-                    </Navbar.Brand>
+                    <Navbar.Brand>Admin</Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>

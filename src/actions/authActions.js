@@ -1,29 +1,17 @@
 import * as firebase from 'firebase';
 import { push } from 'react-router-redux';
 
-// Load All Projects
-export function loginSuccess(data) {
+export function updateAuthData(data) {
     return {
-        type: 'USER_DATA_SUCCESS',
+        type: 'UPDATE_USER_DATA',
         payload: data
     }
-}
-
-export function signOutSuccess(data) {
-    return {
-        type: 'USER_DATA_SUCCESS',
-        payload: data
-    }
-}
-
-export function updateUser(data) {
-
 }
 
 export function loginUser(email, password) {
     return function(dispatch) {
         firebase.auth().signInWithEmailAndPassword(email, password).then(function(success){
-            dispatch(loginSuccess(success));
+            dispatch(updateAuthData(success));
         }).catch(function(error) {
             //console.log('ERROR: ', error);
         });
@@ -33,7 +21,7 @@ export function loginUser(email, password) {
 export function signOutUser() {
     return function(dispatch) {
         firebase.auth().signOut().then(function(success){
-            dispatch(signOutSuccess(success));
+            dispatch(updateAuthData(success));
         });
     }
 }

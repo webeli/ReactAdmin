@@ -5,6 +5,7 @@ import ProjectListContainer from './ProjectListContainer.react';
 
 class Projects extends Component {
     render() {
+        console.log("projects");
         return (
             <div>
                 <Header />
