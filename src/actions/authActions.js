@@ -4,16 +4,20 @@ import { push } from 'react-router-redux';
 // Load All Projects
 export function loginSuccess(data) {
     return {
-        type: 'LOGIN_SUCCESS',
+        type: 'USER_DATA_SUCCESS',
         payload: data
     }
 }
 
 export function signOutSuccess(data) {
     return {
-        type: 'SIGNOUT_SUCCESS',
+        type: 'USER_DATA_SUCCESS',
         payload: data
     }
+}
+
+export function updateUser(data) {
+
 }
 
 export function loginUser(email, password) {

@@ -8,7 +8,7 @@ class Header extends Component {
             <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <Link to={`/`}>Tival Admin</Link>
+                        <Link to={`/login`}>Tival Admin</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
