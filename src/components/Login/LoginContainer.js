@@ -4,14 +4,15 @@ import * as authActions from '../../actions/authActions';
 
 class LoginContainer extends Component {
 
-    componentDidMount() {
+    loginUser() {
         this.props.loginUser('t@t.com', 't');
     }
 
     render() {
-        console.log(this.props);
         return (
-            <div>Login</div>
+            <div>
+                <button onClick={() => this.loginUser()}>Login</button>
+            </div>
         );
     }
 }

@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { Grid, Row, Col, Thumbnail, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import * as authActions from '../../actions/authActions';
 
 class ProjectList extends Component {
 
+    signOut() {
+        this.props.signOut();
+    }
     render() {
         let projects = this.props.projects;
         let projectList = Object.keys(projects).map(project => {
@@ -25,6 +29,7 @@ class ProjectList extends Component {
         return (
             <Grid>
                 <Row className="show-grid">
+                    <button onClick={() => this.signOut()}>signOut</button>
                     {projectList}
                 </Row>
             </Grid>
@@ -34,7 +39,13 @@ class ProjectList extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        projects: state.projects
+        projects: state.projects,
+        auth: state.auth
     };
 }
-export default connect(mapStateToProps)(ProjectList);
+function mapDispatchToProps(dispatch) {
+    return {
+        signOut: () => dispatch(authActions.signOutUser())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectList);

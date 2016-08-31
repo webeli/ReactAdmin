@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import { push } from 'react-router-redux';
 
 // Load All Projects
 export function loginSuccess(data) {
@@ -8,37 +9,40 @@ export function loginSuccess(data) {
     }
 }
 
+export function signOutSuccess(data) {
+    return {
+        type: 'SIGNOUT_SUCCESS',
+        payload: data
+    }
+}
+
 export function loginUser(email, password) {
     return function(dispatch) {
         firebase.auth().signInWithEmailAndPassword(email, password).then(function(success){
-            console.log('SUCCESS: ', success);
             dispatch(loginSuccess(success));
         }).catch(function(error) {
-            console.log('ERROR: ', error);
+            //console.log('ERROR: ', error);
         });
     }
 }
 
-export function stateChangedSuccess(data) {
-    return {
-        type: 'STATE_CHANGED',
-        payload: data
+export function signOutUser() {
+    return function(dispatch) {
+        firebase.auth().signOut().then(function(success){
+            dispatch(signOutSuccess(success));
+        });
     }
 }
 
 export function onAuthStateChanged() {
     return function(dispatch) {
-        firebase.auth().onAuthStateChanged().then(function(success){
-            console.log("onAuthStateChangeSuccess", success);
-            dispatch(stateChangedSuccess(success));
-        }).catch(function(error) {
-            console.log("onAuthStateChangeError", error);
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                dispatch(push('/projects'));
+            } else {
+                dispatch(push('/login'));
+            }
         });
-    }
-}
-export function checkAuth() {
-    return {
-        type: 'GET_AUTH',
-        payload: firebase.User
+
     }
 }

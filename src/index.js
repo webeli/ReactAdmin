@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 import store from './store';
 import { Provider } from 'react-redux';
 import * as firebase from 'firebase';
+import * as authActions from './actions/authActions';
 
 // Initialize Firebase
 var config = {
@@ -23,3 +24,5 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
+store.dispatch(authActions.onAuthStateChanged());
