@@ -9,7 +9,7 @@ export function updateAuthData(data) {
 }
 
 export function loginUser(email, password) {
-    return function(dispatch) {
+    return function(dispatch, getState) {
         firebase.auth().signInWithEmailAndPassword(email, password).then(function(success){
             dispatch(updateAuthData(success));
         }).catch(function(error) {
@@ -19,7 +19,7 @@ export function loginUser(email, password) {
 }
 
 export function signOutUser() {
-    return function(dispatch) {
+    return function(dispatch, getState) {
         firebase.auth().signOut().then(function(success){
             dispatch(updateAuthData(success));
         });
@@ -27,12 +27,13 @@ export function signOutUser() {
 }
 
 export function onAuthStateChanged() {
-    return function(dispatch) {
+    return function(dispatch, getState) {
         firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
+            const state = getState();
+            if (user && state.routing.locationBeforeTransitions.pathname === "/") {
                 dispatch(push('/projects'));
-            } else {
-                dispatch(push('/login'));
+            } else if (!user) {
+                dispatch(push('/'));
             }
         });
 

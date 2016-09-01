@@ -23,6 +23,10 @@
   to { transform: rotate(360deg); }
 }
 
-.btn {
+.btn, .panel-heading {
   background-image:none!important;
+}
+.panel-heading {
+  background:#FFF!important;
+  font-weight:bold;
 }
