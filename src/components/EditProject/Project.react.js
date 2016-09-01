@@ -29,13 +29,13 @@ class Project extends Component {
                     </Col>
                     <Col xs={12} md={6}>
                         <ButtonToolbar>
-                            <Button bsStyle="default" bsSize="xsmall" block>+ CATEGORY</Button>
+                            <Button bsStyle="default" bsSize="default">+ Category</Button>
                         </ButtonToolbar>
                         <br />
                     </Col>
                     <Col xs={12} md={6}>
                         <ButtonToolbar>
-                            <Button bsStyle="default" bsSize="xsmall" block>+ OPTION</Button>
+                            <Button bsStyle="default" bsSize="default">+ Option</Button>
                         </ButtonToolbar>
                         <br />
                     </Col>

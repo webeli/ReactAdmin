@@ -12,7 +12,7 @@ class CategoryList extends Component {
                 return (
                     <Panel key={category} header={categories[category].title} eventKey={category}>
                         <ButtonToolbar>
-                            <Button bsStyle="default" bsSize="xsmall" block>+ ITEM</Button>
+                            <Button bsStyle="default" bsSize="xsmall">+ ITEM</Button>
                         </ButtonToolbar>
                         <br />
                         <CategoryItemList projectKey={this.props.projectKey} items={categories[category].refs} />
