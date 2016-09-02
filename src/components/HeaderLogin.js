@@ -6,7 +6,7 @@ class HeaderLogin extends Component {
         return (
             <Navbar>
                 <Navbar.Header>
-                    <Navbar.Brand>Login</Navbar.Brand>
+                    <Navbar.Brand>ADMIN</Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
             </Navbar>

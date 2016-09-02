@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroupItem } from 'react-bootstrap';
+import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as firebase from 'firebase';
 import * as optionActions from '../../actions/optionActions';
@@ -16,7 +16,13 @@ class ItemList extends Component {
         let itemArray = getByKeys(dbRef, this.props.items);
         let list = Object.keys(itemArray).map(item => {
             return (
-                <ListGroupItem key={itemArray[item].key} onClick={this.getItemOptions.bind(this, itemArray[item].key)}>{itemArray[item].val.title}</ListGroupItem>
+                <ButtonToolbar>
+                    <ButtonGroup bsSize="sm">
+                        <Button bsStyle="danger">x</Button>
+                        <Button bsStyle="primary">I</Button>
+                        <Button key={itemArray[item].key} onClick={this.getItemOptions.bind(this, itemArray[item].key)}>{itemArray[item].val.title}</Button>
+                    </ButtonGroup>
+                </ButtonToolbar>
             );
         });
         return (

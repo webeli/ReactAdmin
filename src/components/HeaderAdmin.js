@@ -13,7 +13,7 @@ class HeaderAdmin extends Component {
         return (
             <Navbar>
                 <Navbar.Header>
-                    <Navbar.Brand>Admin</Navbar.Brand>
+                    <Navbar.Brand>ADMIN</Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
