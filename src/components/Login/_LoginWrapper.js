@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Header from '../Header';
+import HeaderLogin from '../HeaderLogin';
 import LoginContainer from './LoginContainer';
 
 class Login extends Component {
     render() {
         return (
             <div>
-                <Header />
+                <HeaderLogin />
                 <LoginContainer />
             </div>
         );

@@ -13,7 +13,7 @@ export function loginUser(email, password) {
         firebase.auth().signInWithEmailAndPassword(email, password).then(function(success){
             dispatch(updateAuthData(success));
         }).catch(function(error) {
-            //console.log('ERROR: ', error);
+            console.log('ERROR: ', error);
         });
     }
 }

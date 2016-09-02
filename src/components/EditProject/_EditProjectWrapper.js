@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../Header';
+import Header from '../HeaderAdmin';
 import ProjectContainer from './ProjectContainer.react'
 
 class EditProject extends Component {
