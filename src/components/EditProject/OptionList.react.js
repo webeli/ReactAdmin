@@ -7,13 +7,14 @@ class OptionList extends Component {
     render() {
         let optionList = null;
         let options = this.props.options;
+        let itemOptions = this.props.project.itemOptions;
         if (options) {
             optionList = Object.keys(options).map(option => {
                 return (
-                    <Panel key={option} header={options[option].title} eventKey={option}>
-                        <p>{options[option].desc}</p>
-                        <p>{options[option].price}</p>
-                        <img src={options[option].image} height="100px" width="100px" alt={options[option].title}/>
+                    <Panel key={option} header={itemOptions[option].title} eventKey={option}>
+                        <p>{itemOptions[option].desc}</p>
+                        <p>{itemOptions[option].price}</p>
+                        <img src={itemOptions[option].image} height="100px" width="100px" alt={itemOptions[option].title}/>
                         <p></p>
                         <ButtonToolbar>
                             <Button bsSize="small" bsStyle="danger">Delete</Button>
@@ -33,7 +34,8 @@ class OptionList extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        options: state.options
+        options: state.options,
+        project: state.project
     };
 }
 export default connect(mapStateToProps)(OptionList);

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import * as firebase from 'firebase';
 import * as optionActions from '../../actions/optionActions';
-import { getByKeys } from '../../lib/helpers';
 
 
 class ItemList extends Component {
@@ -12,19 +10,19 @@ class ItemList extends Component {
     }
 
     render() {
-        const dbRef = firebase.database().ref(this.props.projectKey).child('categoryItems');
-        let itemArray = getByKeys(dbRef, this.props.items);
-        let list = Object.keys(itemArray).map(item => {
+        const categoryItems = this.props.project.categoryItems;
+        const list = Object.keys(this.props.items).map(item => {
             return (
-                <ButtonToolbar>
+                <ButtonToolbar key={item}>
                     <ButtonGroup bsSize="sm">
                         <Button bsStyle="danger">x</Button>
                         <Button bsStyle="primary">I</Button>
-                        <Button key={itemArray[item].key} onClick={this.getItemOptions.bind(this, itemArray[item].key)}>{itemArray[item].val.title}</Button>
+                        <Button onClick={this.getItemOptions.bind(this, categoryItems[item].key)}>{categoryItems[item].title}</Button>
                     </ButtonGroup>
                 </ButtonToolbar>
             );
         });
+
         return (
             <div>
                 {list}
@@ -35,7 +33,8 @@ class ItemList extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        options: state.options
+        options: state.options,
+        project: state.project
     };
 }
 function mapDispatchToProps(dispatch) {
