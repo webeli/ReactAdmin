@@ -19,7 +19,7 @@ class OptionList extends Component {
                     <Panel key={option} header={itemOptions[option].title} eventKey={option}>
                         <p>{itemOptions[option].desc}</p>
                         <p>{itemOptions[option].price}</p>
-                        <img src={itemOptions[option].image} height="100px" width="100px" alt={itemOptions[option].title}/>
+                        <img src={itemOptions[option].image} height="50px" width="50px" alt={itemOptions[option].title}/>
                         <p></p>
                         <ButtonToolbar>
                             <Button bsSize="small" bsStyle="danger">Delete</Button>

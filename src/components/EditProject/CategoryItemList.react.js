@@ -11,9 +11,10 @@ class ItemList extends Component {
 
     render() {
         let list = null;
-        if (this.props.items) {
+        let items = this.props.items;
+        if (items) {
             const categoryItems = this.props.project.categoryItems;
-            list = Object.keys(this.props.items).map(item => {
+            list = Object.keys(items).map(item => {
                 return (
                     <ButtonToolbar key={item}>
                         <ButtonGroup bsSize="sm">

@@ -4,7 +4,7 @@ import { Navbar  } from 'react-bootstrap';
 class HeaderLogin extends Component {
     render() {
         return (
-            <Navbar>
+            <Navbar inverse>
                 <Navbar.Header>
                     <Navbar.Brand>ADMIN</Navbar.Brand>
                     <Navbar.Toggle />
