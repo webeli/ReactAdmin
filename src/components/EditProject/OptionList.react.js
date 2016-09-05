@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import * as optionActions from '../../actions/optionActions';
 
 class OptionList extends Component {
+
+    componentWillUnmount() {
+        this.props.clearOptionList();
+    }
 
     render() {
         let optionList = null;
@@ -38,4 +43,9 @@ function mapStateToProps(state, ownProps) {
         project: state.project
     };
 }
-export default connect(mapStateToProps)(OptionList);
+function mapDispatchToProps(dispatch) {
+    return {
+        clearOptionList: () => dispatch(optionActions.clearOptionList())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(OptionList);

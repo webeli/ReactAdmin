@@ -16,3 +16,9 @@ export function getOptionListByKey(projectKey, itemKey) {
         });
     }
 }
+
+export function clearOptionList() {
+    return function(dispatch) {
+        dispatch(getOptionListSuccess({}));
+    }
+}
