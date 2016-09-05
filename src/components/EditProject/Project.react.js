@@ -4,6 +4,7 @@ import CategoryList from './CategoryList.react';
 import OptionList from './OptionList.react';
 import { connect } from 'react-redux';
 import ModalProjectSettings from './ModalProjectSettings';
+import * as updateDataActions from '../../actions/updateDataActions';
 
 class Project extends Component {
 
@@ -29,7 +30,7 @@ class Project extends Component {
                     </Col>
                     <Col xs={12} md={6}>
                         <ButtonToolbar>
-                            <Button bsStyle="default">+ Category</Button>
+                            <Button bsStyle="default" onClick={()=>this.props.addCategory(this.props.projectKey)}>+ Category</Button>
                         </ButtonToolbar>
                         <br />
                     </Col>
@@ -56,4 +57,9 @@ function mapStateToProps(state, ownProps) {
         project: state.project
     };
 }
-export default connect(mapStateToProps)(Project);
+function mapDispatchToProps(dispatch) {
+    return {
+        addCategory: (key) => dispatch(updateDataActions.addCategory(key))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Project);
