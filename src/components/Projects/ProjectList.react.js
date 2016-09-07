@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Thumbnail, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Thumbnail, ButtonToolbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -24,6 +24,10 @@ class ProjectList extends Component {
 
         return (
             <Grid>
+                <p></p>
+                <ButtonToolbar>
+                    <Button>+ New project</Button>
+                </ButtonToolbar>
                 <p></p>
                 <Row className="show-grid">
                     {projectList}
