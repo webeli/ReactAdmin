@@ -20,7 +20,7 @@ class ItemList extends Component {
                         <ButtonGroup bsSize="sm">
                             <Button bsStyle="danger">x</Button>
                             <Button bsStyle="primary">I</Button>
-                            <Button onClick={this.getItemOptions.bind(this, categoryItems[item].key)}>{categoryItems[item].title}</Button>
+                            <Button style={{padding:"5px 25px"}} onClick={this.getItemOptions.bind(this, categoryItems[item].key)}>{categoryItems[item].title}</Button>
                         </ButtonGroup>
                     </ButtonToolbar>
                 );
