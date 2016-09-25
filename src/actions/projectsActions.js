@@ -9,10 +9,8 @@ export function loadAllProjectsSuccess(projects) {
 }
 export function getAllProjects() {
     return function(dispatch) {
-        const dbRef = firebase.database().ref('projects');
-        dbRef.on('value', (snap) => {
-            const data = snap.val();
-            dispatch(loadAllProjectsSuccess(data));
+        firebase.database().ref('projects').on('value', (snap) => {
+            dispatch(loadAllProjectsSuccess(snap.val()));
         });
     }
 }
