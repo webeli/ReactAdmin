@@ -3,13 +3,27 @@ import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as optionActions from '../../actions/optionActions';
 
+import ModalEditOption from './Modal/Modal_Edit_Option';
+import ModalDeleteOption from './Modal/Modal_Delete_Option';
+
 class OptionList extends Component {
 
     componentWillUnmount() {
         this.props.clearOptionList();
     }
 
+    constructor(props){
+        super(props);
+        this.state = {
+            modalEditOption: false,
+            modalDeleteOption: false
+        };
+    }
+
     render() {
+        let modalEditOption = () => this.setState({ modalEditOption: false });
+        let modalDeleteOption = () => this.setState({ modalDeleteOption: false });
+
         let optionList = null;
         let options = this.props.options;
         let itemOptions = this.props.project.itemOptions;
@@ -22,8 +36,8 @@ class OptionList extends Component {
                         <img src={itemOptions[option].image} height="50px" width="50px" alt={itemOptions[option].title}/>
                         <p></p>
                         <ButtonToolbar>
-                            <Button bsSize="small" bsStyle="danger">Delete</Button>
-                            <Button bsSize="small" bsStyle="primary">Edit</Button>
+                            <Button bsSize="small" bsStyle="danger" onClick={()=>this.setState({ modalDeleteOption: true })}>Delete</Button>
+                            <Button bsSize="small" bsStyle="primary" onClick={()=>this.setState({ modalEditOption: true })}>Edit</Button>
                         </ButtonToolbar>
                     </Panel>
                 )
@@ -31,6 +45,8 @@ class OptionList extends Component {
         }
         return (
             <div>
+                <ModalEditOption show={this.state.modalEditOption} onHide={modalEditOption} />
+                <ModalDeleteOption show={this.state.modalDeleteOption} onHide={modalDeleteOption} />
                 {optionList}
             </div>
         );
