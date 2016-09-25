@@ -10,7 +10,7 @@ export function getOptionListSuccess(data) {
 
 export function getOptionListByKey(projectKey, itemKey) {
     return function(dispatch) {
-        const optionListRefs = firebase.database().ref(projectKey).child('categoryItems').child(itemKey).child('refs');
+        const optionListRefs = firebase.database().ref('projects').child(projectKey).child('categoryItems').child(itemKey).child('refs');
         optionListRefs.on('value', (snap) => {
             dispatch(getOptionListSuccess(snap.val()));
         });

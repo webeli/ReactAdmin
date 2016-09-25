@@ -10,7 +10,7 @@ export function loadProjectSuccess(project) {
 
 export function getProjectByKey(key) {
     return function(dispatch) {
-        const projectRef = firebase.database().ref(key);
+        const projectRef = firebase.database().ref('projects').child(key);
         projectRef.on('value', (snap) => {
             const data = snap.val();
             dispatch(loadProjectSuccess(data));
