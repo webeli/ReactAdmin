@@ -36,8 +36,8 @@ class OptionList extends Component {
                         <img src={itemOptions[option].image} height="50px" width="50px" alt={itemOptions[option].title}/>
                         <p></p>
                         <ButtonToolbar>
-                            <Button bsSize="small" bsStyle="danger" onClick={()=>this.setState({ modalDeleteOption: true })}>Delete</Button>
-                            <Button bsSize="small" bsStyle="primary" onClick={()=>this.setState({ modalEditOption: true })}>Edit</Button>
+                            <Button bsSize="xsmall" bsStyle="danger" onClick={()=>this.setState({ modalDeleteOption: true })}>Delete {itemOptions[option].title}</Button>
+                            <Button bsSize="xsmall" bsStyle="primary" onClick={()=>this.setState({ modalEditOption: true })}>Edit {itemOptions[option].title}</Button>
                         </ButtonToolbar>
                     </Panel>
                 )

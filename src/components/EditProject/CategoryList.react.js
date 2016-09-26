@@ -36,8 +36,8 @@ class CategoryList extends Component {
                         <CategoryItemList projectKey={this.props.projectKey} items={categories[category].refs} />
                         <br />
                         <ButtonToolbar>
-                            <Button bsStyle="primary" bsSize="xsmall" onClick={()=>this.setState({ modalEditCategory: true })}>Edit {categories[category].title}</Button>
                             <Button bsStyle="danger" bsSize="xsmall" onClick={()=>this.setState({ modalDeleteCategory: true })}>Delete {categories[category].title}</Button>
+                            <Button bsStyle="primary" bsSize="xsmall" onClick={()=>this.setState({ modalEditCategory: true })}>Edit {categories[category].title}</Button>
                         </ButtonToolbar>
                     </Panel>
                 )
