@@ -1,5 +1,3 @@
-### ReactAdmin
-
 Run
 ```
 npm start
