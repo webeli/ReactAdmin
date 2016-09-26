@@ -2,7 +2,20 @@
   background-image:none!important;
 }
 .panel-heading {
-  background:#FFF!important;
+  background:#26b6b4!important;
+  color:#FFF!important;
   font-weight:bold;
   text-transform:uppercase;
+}
+
+.navbar-default {
+  background-color:#26b6b4!important;
+  background-image:none!important;
+  color:#FFF!important;
+}
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
+  color:#FFF!important;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color:#FFF!important;
 }
