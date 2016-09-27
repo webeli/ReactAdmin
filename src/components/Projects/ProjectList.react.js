@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import { Grid, Row, Col, Thumbnail, ButtonToolbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import * as projectActions from '../../actions/projectActions';
 
 class ProjectList extends Component {
+
+    loadProject(key) {
+        console.log(key);
+        this.props.getProjectByKey(key);
+    }
 
     render() {
         let projects = this.props.projects;
@@ -14,7 +20,7 @@ class ProjectList extends Component {
                         <h3>{projects[project].pName}</h3>
                         <p>Description</p>
                         <p>
-                            <Link to={`/editproject/${project}`}><Button bsStyle="primary">Manage</Button></Link>&nbsp;
+                            <Link to={`/editproject/${project}`}><Button onClick={()=>this.loadProject(project)} bsStyle="primary">Manage</Button></Link>&nbsp;
                             <Button bsStyle="default">View</Button>
                         </p>
                     </Thumbnail>
@@ -39,8 +45,12 @@ class ProjectList extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        projects: state.projects,
-        auth: state.auth
+        projects: state.projects
     };
 }
-export default connect(mapStateToProps)(ProjectList);
+function mapDispatchToProps(dispatch) {
+    return {
+        getProjectByKey: key => dispatch(projectActions.getProjectByKey(key))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectList);

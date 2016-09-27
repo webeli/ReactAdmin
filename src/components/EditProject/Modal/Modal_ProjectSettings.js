@@ -7,15 +7,27 @@ class ModalProjectSettings extends Component {
         super(props);
         if (this.props.projectSettings) {
             this.state = {
-                city: this.props.projectSettings.companyCity,
-                name: this.props.projectSettings.companyName,
-                companyPhone: this.props.projectSettings.companyPhone,
-                companyStreet: this.props.projectSettings.companyStreet,
-                companyWebsite: this.props.projectSettings.companyWebsite,
-                companyZip: this.props.projectSettings.companyZip,
-                projectDeadline: this.props.projectSettings.projectDeadline,
-                projectEmail: this.props.projectSettings.projectEmail,
-                projectName: this.props.projectSettings.projectName
+                city: this.props.projectSettings.companyCity || '',
+                name: this.props.projectSettings.companyName || '',
+                companyPhone: this.props.projectSettings.companyPhone || '',
+                companyStreet: this.props.projectSettings.companyStreet || '',
+                companyWebsite: this.props.projectSettings.companyWebsite || '',
+                companyZip: this.props.projectSettings.companyZip || '',
+                projectDeadline: this.props.projectSettings.projectDeadline || '',
+                projectEmail: this.props.projectSettings.projectEmail || '',
+                projectName: this.props.projectSettings.projectName || ''
+            };
+        } else {
+            this.state = {
+                city: '',
+                name: '',
+                companyPhone: '',
+                companyStreet: '',
+                companyWebsite: '',
+                companyZip: '',
+                projectDeadline: '',
+                projectEmail: '',
+                projectName: ''
             };
         }
 
@@ -30,10 +42,6 @@ class ModalProjectSettings extends Component {
         this.handleProjectName = this.handleProjectName.bind(this);
 
     }
-    updateProjectSettings(e) {
-        e.preventDefault();
-        console.log(e);
-    }
     handleCityChange(e) { this.setState({city: e.target.value}); }
     handleNameChange (e) { this.setState({name: e.target.value}); }
     handleCompanyPhone (e) { this.setState({companyPhone: e.target.value}); }
@@ -44,6 +52,10 @@ class ModalProjectSettings extends Component {
     handleProjectEmail (e) { this.setState({projectEmail: e.target.value}); }
     handleProjectName (e) { this.setState({projectName: e.target.value}); }
 
+    updateProjectSettings(e) {
+        e.preventDefault();
+        console.log(e);
+    }
 
     render() {
         return (
