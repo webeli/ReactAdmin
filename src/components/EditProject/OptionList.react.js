@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
+import { Panel, ButtonToolbar, Button, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as optionActions from '../../actions/optionActions';
 
@@ -30,16 +30,18 @@ class OptionList extends Component {
         if (options) {
             optionList = Object.keys(options).map(option => {
                 return (
-                    <Panel key={option} header={itemOptions[option].title} eventKey={option}>
-                        <p>{itemOptions[option].desc}</p>
-                        <p>{itemOptions[option].price}</p>
-                        <img src={itemOptions[option].image} height="50px" width="50px" alt={itemOptions[option].title}/>
-                        <p></p>
-                        <ButtonToolbar>
-                            <Button bsSize="xsmall" bsStyle="danger" onClick={()=>this.setState({ modalDeleteOption: true })}>Delete {itemOptions[option].title}</Button>
-                            <Button bsSize="xsmall" bsStyle="primary" onClick={()=>this.setState({ modalEditOption: true })}>Edit {itemOptions[option].title}</Button>
-                        </ButtonToolbar>
-                    </Panel>
+                    <Col md={6} key={option}>
+                        <Panel header={itemOptions[option].title} eventKey={option}>
+                            <p style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{itemOptions[option].desc || 'No description'}</p>
+                            <p>{itemOptions[option].price || 'No price'}</p>
+                            <img src={itemOptions[option].image} height="50px" width="50px" alt={itemOptions[option].title}/>
+                            <p></p>
+                            <ButtonToolbar>
+                                <Button bsSize="xsmall" bsStyle="danger" onClick={()=>this.setState({ modalDeleteOption: true })}>Delete</Button>
+                                <Button bsSize="xsmall" bsStyle="primary" onClick={()=>this.setState({ modalEditOption: true })}>Edit</Button>
+                            </ButtonToolbar>
+                        </Panel>
+                    </Col>
                 )
             });
         }
