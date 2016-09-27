@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import ModalProjectSettings from './Modal/Modal_ProjectSettings';
 import ModalNewCategory from './Modal/Modal_New_Category';
 import ModalNewOption from './Modal/Modal_New_Option';
-
 import * as updateDataActions from '../../actions/updateDataActions';
 
 class Project extends Component {
@@ -21,22 +20,20 @@ class Project extends Component {
     }
 
     render() {
-        // Project Settings
         let modalProjectSettings = () => this.setState({ modalProjectSettings: false });
-        // New
         let modalNewCategory = () => this.setState({ modalNewCategory: false });
         let modalNewOption = () => this.setState({ modalNewOption: false });
 
         return (
             <Grid>
-                <ModalProjectSettings show={this.state.modalProjectSettings} onHide={modalProjectSettings} />
+                <ModalProjectSettings projectKey={this.props.projectKey} show={this.state.modalProjectSettings} onHide={modalProjectSettings} />
                 <ModalNewCategory show={this.state.modalNewCategory} onHide={modalNewCategory} />
                 <ModalNewOption show={this.state.modalNewOption} onHide={modalNewOption} />
 
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
-                        <h2>{this.props.project.pName}</h2>
-                        <p>{this.props.project.deadline}</p>
+                        <h2>{this.props.projectSettings.projectName}</h2>
+                        <p>{this.props.projectSettings.projectDeadline}</p>
                         <ButtonToolbar>
                             <Button onClick={()=>this.setState({ modalProjectSettings: true })}>Project Settings</Button>
                         </ButtonToolbar>
@@ -68,7 +65,8 @@ class Project extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        project: state.project
+        project: state.project,
+        projectSettings: state.project.projectSettings
     };
 }
 function mapDispatchToProps(dispatch) {

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Modal, Button, ButtonToolbar, Form, FormGroup, FormControl, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import * as updateDataActions from '../../../actions/updateDataActions';
 
 class ModalProjectSettings extends Component {
     constructor(props) {
         super(props);
         if (this.props.projectSettings) {
             this.state = {
-                city: this.props.projectSettings.companyCity || '',
-                name: this.props.projectSettings.companyName || '',
+                companyCity: this.props.projectSettings.companyCity || '',
+                companyName: this.props.projectSettings.companyName || '',
                 companyPhone: this.props.projectSettings.companyPhone || '',
                 companyStreet: this.props.projectSettings.companyStreet || '',
                 companyWebsite: this.props.projectSettings.companyWebsite || '',
@@ -19,8 +20,8 @@ class ModalProjectSettings extends Component {
             };
         } else {
             this.state = {
-                city: '',
-                name: '',
+                companyCity: '',
+                companyName: '',
                 companyPhone: '',
                 companyStreet: '',
                 companyWebsite: '',
@@ -42,8 +43,8 @@ class ModalProjectSettings extends Component {
         this.handleProjectName = this.handleProjectName.bind(this);
 
     }
-    handleCityChange(e) { this.setState({city: e.target.value}); }
-    handleNameChange (e) { this.setState({name: e.target.value}); }
+    handleCityChange(e) { this.setState({companyCity: e.target.value}); }
+    handleNameChange (e) { this.setState({companyName: e.target.value}); }
     handleCompanyPhone (e) { this.setState({companyPhone: e.target.value}); }
     handleCompanyStreet (e) { this.setState({companyStreet: e.target.value}); }
     handleCompanyWebsite (e) { this.setState({companyWebsite: e.target.value}); }
@@ -54,7 +55,8 @@ class ModalProjectSettings extends Component {
 
     updateProjectSettings(e) {
         e.preventDefault();
-        console.log(e);
+        this.props.setProjectSettings(this.props.projectKey, this.state);
+        this.props.onHide();
     }
 
     render() {
@@ -65,15 +67,15 @@ class ModalProjectSettings extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Col>
-                        <Form onSubmit={this.updateProjectSettings}>
+                        <Form onSubmit={this.updateProjectSettings.bind(this)}>
                             <FormGroup controlId="companyCity">
                                 <FormControl type="text" placeholder="city"
-                                             value={this.state.city}
+                                             value={this.state.companyCity}
                                              onChange={this.handleCityChange}/>
                             </FormGroup>
                             <FormGroup controlId="companyName">
                                 <FormControl type="text" placeholder="name"
-                                             value={this.state.name}
+                                             value={this.state.companyName}
                                              onChange={this.handleNameChange}/>
                             </FormGroup>
                             <FormGroup controlId="companyPhone">
@@ -106,6 +108,11 @@ class ModalProjectSettings extends Component {
                                              value={this.state.projectEmail}
                                              onChange={this.handleProjectEmail}/>
                             </FormGroup>
+                            <FormGroup controlId="projectName">
+                                <FormControl type="text" placeholder="projectName"
+                                             value={this.state.projectName}
+                                             onChange={this.handleProjectName}/>
+                            </FormGroup>
                             <FormGroup>
                                 <ButtonToolbar>
                                     <Button bsStyle="default" type="submit">Reset</Button>
@@ -128,4 +135,9 @@ function mapStateToProps(state, ownProps) {
         projectSettings: state.project.projectSettings
     };
 }
-export default connect(mapStateToProps)(ModalProjectSettings);
+function mapDispatchToProps(dispatch) {
+    return {
+        setProjectSettings: (projectKey, data) => dispatch(updateDataActions.setProjectSettings(projectKey, data))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ModalProjectSettings);
