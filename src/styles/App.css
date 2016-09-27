@@ -1,15 +1,18 @@
 .btn, .panel-heading {
   background-image:none!important;
 }
-.panel-heading {
-  background:#26b6b4!important;
+.panel-heading, .modal-header {
+  background:#313131!important;
   color:#FFF!important;
   font-weight:bold;
   text-transform:uppercase;
 }
+.modal-header {
+  border:1px solid #FFF!important;
+}
 
 .navbar-default {
-  background-color:#26b6b4!important;
+  background-color:#313131!important;
   background-image:none!important;
   color:#FFF!important;
 }

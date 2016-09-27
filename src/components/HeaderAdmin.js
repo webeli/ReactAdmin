@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import * as authActions from '../actions/authActions';
 
@@ -14,14 +14,11 @@ class HeaderAdmin extends Component {
         return (
             <Navbar>
                 <Navbar.Header>
-                    <Navbar.Brand>TIVAL Admin</Navbar.Brand>
+                    <Navbar.Brand><Link to={`/projects`}>TIVAL Admin</Link></Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
-                        <LinkContainer to={{ pathname: '/projects', query: { bar: 'baz' } }}>
-                            <Button>Projects</Button>
-                        </LinkContainer>
                         <NavItem eventKey={1} href="#" onClick={() => this.signOut()}>SignOut</NavItem>
                     </Nav>
                 </Navbar.Collapse>
