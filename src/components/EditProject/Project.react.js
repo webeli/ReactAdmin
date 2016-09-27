@@ -27,8 +27,6 @@ class Project extends Component {
         let modalNewCategory = () => this.setState({ modalNewCategory: false });
         let modalNewOption = () => this.setState({ modalNewOption: false });
 
-        console.log('Project',this.props);
-
         return (
             <Grid>
                 <ModalProjectSettings show={this.state.modalProjectSettings} onHide={modalProjectSettings} />
