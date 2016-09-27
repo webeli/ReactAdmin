@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Form, FormGroup, FormControl, Col } from 'react-bootstrap';
+import { Modal, Button, ButtonToolbar, Form, FormGroup, FormControl, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class ModalProjectSettings extends Component {
@@ -46,7 +46,6 @@ class ModalProjectSettings extends Component {
 
 
     render() {
-        console.log('Modal_ProjectSettings', this.props);
         return (
             <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large" aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
@@ -96,9 +95,10 @@ class ModalProjectSettings extends Component {
                                              onChange={this.handleProjectEmail}/>
                             </FormGroup>
                             <FormGroup>
-                                <Button type="submit">
-                                    Update
-                                </Button>
+                                <ButtonToolbar>
+                                    <Button bsStyle="default" type="submit">Reset</Button>
+                                    <Button bsStyle="primary" type="submit">Update</Button>
+                                </ButtonToolbar>
                             </FormGroup>
                         </Form>
                     </Col>
@@ -112,7 +112,6 @@ class ModalProjectSettings extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-    console.log(state);
     return {
         projectSettings: state.project.projectSettings
     };
