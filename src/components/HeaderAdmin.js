@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import * as authActions from '../actions/authActions';
 
@@ -18,6 +19,9 @@ class HeaderAdmin extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
+                        <LinkContainer to={{ pathname: '/projects', query: { bar: 'baz' } }}>
+                            <Button>Projects</Button>
+                        </LinkContainer>
                         <NavItem eventKey={1} href="#" onClick={() => this.signOut()}>SignOut</NavItem>
                     </Nav>
                 </Navbar.Collapse>
@@ -28,8 +32,7 @@ class HeaderAdmin extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        projects: state.projects,
-        auth: state.auth
+        projects: state.projects
     };
 }
 function mapDispatchToProps(dispatch) {
