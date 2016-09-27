@@ -1,24 +1,107 @@
 import React, { Component } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Form, FormGroup, FormControl, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 class ModalProjectSettings extends Component {
+    constructor(props) {
+        super(props);
+        if (this.props.projectSettings) {
+            this.state = {
+                city: this.props.projectSettings.companyCity,
+                name: this.props.projectSettings.companyName,
+                companyPhone: this.props.projectSettings.companyPhone,
+                companyStreet: this.props.projectSettings.companyStreet,
+                companyWebsite: this.props.projectSettings.companyWebsite,
+                companyZip: this.props.projectSettings.companyZip,
+                projectDeadline: this.props.projectSettings.projectDeadline,
+                projectEmail: this.props.projectSettings.projectEmail,
+                projectName: this.props.projectSettings.projectName
+            };
+        }
+
+        this.handleCityChange = this.handleCityChange.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleCompanyPhone = this.handleCompanyPhone.bind(this);
+        this.handleCompanyStreet = this.handleCompanyStreet.bind(this);
+        this.handleCompanyWebsite = this.handleCompanyWebsite.bind(this);
+        this.handleCompanyZip = this.handleCompanyZip.bind(this);
+        this.handleProjectDeadline = this.handleProjectDeadline.bind(this);
+        this.handleProjectEmail = this.handleProjectEmail.bind(this);
+        this.handleProjectName = this.handleProjectName.bind(this);
+
+    }
+    updateProjectSettings(e) {
+        e.preventDefault();
+        console.log(e);
+    }
+    handleCityChange(e) { this.setState({city: e.target.value}); }
+    handleNameChange (e) { this.setState({name: e.target.value}); }
+    handleCompanyPhone (e) { this.setState({companyPhone: e.target.value}); }
+    handleCompanyStreet (e) { this.setState({companyStreet: e.target.value}); }
+    handleCompanyWebsite (e) { this.setState({companyWebsite: e.target.value}); }
+    handleCompanyZip (e) { this.setState({companyZip: e.target.value}); }
+    handleProjectDeadline (e) { this.setState({projectDeadline: e.target.value}); }
+    handleProjectEmail (e) { this.setState({projectEmail: e.target.value}); }
+    handleProjectName (e) { this.setState({projectName: e.target.value}); }
+
+
     render() {
+        console.log('Modal_ProjectSettings', this.props);
         return (
-            <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-lg">
+            <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large" aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-lg">Project Settings</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h4>Wrapped Text</h4>
-                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                    <Col>
+                        <Form onSubmit={this.updateProjectSettings}>
+                            <FormGroup controlId="companyCity">
+                                <FormControl type="text" placeholder="city"
+                                             value={this.state.city}
+                                             onChange={this.handleCityChange}/>
+                            </FormGroup>
+                            <FormGroup controlId="companyName">
+                                <FormControl type="text" placeholder="name"
+                                             value={this.state.name}
+                                             onChange={this.handleNameChange}/>
+                            </FormGroup>
+                            <FormGroup controlId="companyPhone">
+                                <FormControl type="text" placeholder="companyPhone"
+                                             value={this.state.companyPhone}
+                                             onChange={this.handleCompanyPhone}/>
+                            </FormGroup>
+                            <FormGroup controlId="handleCompanyStreet">
+                                <FormControl type="text" placeholder="companyStreet"
+                                             value={this.state.companyStreet}
+                                             onChange={this.handleCompanyStreet}/>
+                            </FormGroup>
+                            <FormGroup controlId="companyWebsite">
+                                <FormControl type="text" placeholder="companyWebsite"
+                                             value={this.state.companyWebsite}
+                                             onChange={this.handleCompanyWebsite}/>
+                            </FormGroup>
+                            <FormGroup controlId="companyZip">
+                                <FormControl type="text" placeholder="companyZip"
+                                             value={this.state.companyZip}
+                                             onChange={this.handleCompanyZip}/>
+                            </FormGroup>
+                            <FormGroup controlId="projectDeadline">
+                                <FormControl type="text" placeholder="projectDeadline"
+                                             value={this.state.projectDeadline}
+                                             onChange={this.handleProjectDeadline}/>
+                            </FormGroup>
+                            <FormGroup controlId="projectEmail">
+                                <FormControl type="text" placeholder="projectEmail"
+                                             value={this.state.projectEmail}
+                                             onChange={this.handleProjectEmail}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Button type="submit">
+                                    Update
+                                </Button>
+                            </FormGroup>
+                        </Form>
+                    </Col>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.props.onHide}>Close</Button>
@@ -28,4 +111,10 @@ class ModalProjectSettings extends Component {
     }
 }
 
-export default ModalProjectSettings;
+function mapStateToProps(state, ownProps) {
+    console.log(state);
+    return {
+        projectSettings: state.project.projectSettings
+    };
+}
+export default connect(mapStateToProps)(ModalProjectSettings);
