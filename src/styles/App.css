@@ -1,6 +1,11 @@
 .btn, .panel-heading {
   background-image:none!important;
 }
+.panel-heading {
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
 .panel-heading, .modal-header {
   background:#313131!important;
   color:#FFF!important;
