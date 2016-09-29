@@ -23,14 +23,13 @@ class OptionList extends Component {
     }
 
     render() {
-        console.log("option props", this.props);
         let modalNewOption = () => this.setState({ modalNewOption: false });
         let modalEditOption = () => this.setState({ modalEditOption: false });
         let modalDeleteOption = () => this.setState({ modalDeleteOption: false });
         let newOptionHolder = () => {
             return (
                 <Col md={12}>
-                    <Panel header="New Option">
+                    <Panel header={`Create option in item: ${this.props.itemSelectedTitle}`}>
                         <ButtonToolbar>
                             <Button bsStyle="default" onClick={()=>this.setState({ modalNewOption: true })}>+ New Option</Button>
                         </ButtonToolbar>
@@ -41,12 +40,10 @@ class OptionList extends Component {
 
         let optionList = null;
         let newOption = null;
-        let options = this.props.options;
         let itemOptions = this.props.project.itemOptions;
-        //Object.keys(options).length !== 0
-        if (options) {
+        if (this.props.options && this.props.itemSelected) {
             newOption = newOptionHolder();
-            optionList = Object.keys(options).map(option => {
+            optionList = Object.keys(this.props.options).map(option => {
                 return (
                     <Col md={6} key={option}>
                         <Panel header={itemOptions[option].title} eventKey={option}>
@@ -75,10 +72,11 @@ class OptionList extends Component {
     }
 }
 
-function mapStateToProps(state, ownProps) {
-    console.log("state options", state);
+function mapStateToProps(state) {
     return {
-        options: state.options,
+        itemSelected: state.options.selected,
+        itemSelectedTitle: state.options.itemTitle,
+        options: state.options.data,
         project: state.project
     };
 }

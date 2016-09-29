@@ -53,7 +53,7 @@ class CategoryList extends Component {
                 <ModalNewCategory show={this.state.modalNewCategory} onHide={modalNewCategory} />
                 <ModalEditCategory show={this.state.modalEditCategory} onHide={modalEditCategory} />
                 <ModalDeleteCategory show={this.state.modalDeleteCategory} onHide={modalDeleteCategory} />
-                <Panel header="New Category">
+                <Panel header="Create Category">
                     <ButtonToolbar>
                         <Button bsStyle="default" onClick={()=>this.setState({ modalNewCategory: true })}>+ New Category</Button>
                     </ButtonToolbar>

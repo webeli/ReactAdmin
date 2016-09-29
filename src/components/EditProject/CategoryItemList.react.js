@@ -16,9 +16,8 @@ class ItemList extends Component {
         };
     }
 
-    getItemOptions(itemKey) {
-        console.log("itemKey", itemKey);
-        this.props.getOptionListByKey(this.props.project.projectKey, itemKey);
+    getItemOptions(itemKey, itemTitle) {
+        this.props.getOptionListByKey(this.props.project.projectKey, itemKey, itemTitle);
     }
 
     render() {
@@ -35,7 +34,7 @@ class ItemList extends Component {
                         <ButtonGroup bsSize="sm">
                             <Button bsStyle="danger" onClick={()=>this.setState({ modalDeleteItem: true })}>x</Button>
                             <Button bsStyle="primary" onClick={()=>this.setState({ modalEditItem: true })}>I</Button>
-                            <Button style={{padding:"5px 25px"}} onClick={this.getItemOptions.bind(this, categoryItems[item].key)}>{categoryItems[item].title}</Button>
+                            <Button style={{padding:"5px 25px"}} onClick={() => this.getItemOptions(categoryItems[item].key, categoryItems[item].title)}>{categoryItems[item].title}</Button>
                         </ButtonGroup>
                     </ButtonToolbar>
                 );
@@ -60,7 +59,7 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        getOptionListByKey: (key1, key2) => dispatch(optionActions.getOptionListByKey(key1, key2))
+        getOptionListByKey: (key1, key2, key3) => dispatch(optionActions.getOptionListByKey(key1, key2, key3))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList);

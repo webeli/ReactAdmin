@@ -18,14 +18,12 @@ class ModalNewCategoryItem extends Component {
     addNewCategory(e) {
         e.preventDefault();
         if (this.state.newCategoryItem !== '') {
-            console.log("Modal_New_CategoryItem", this.props.project.projectKey, this.props.categoryKey, this.state.newCategoryItem);
             this.props.addCategoryItem(this.props.project.projectKey, this.props.categoryKey, this.state.newCategoryItem);
             this.setState({newCategoryItem: ''});
             this.props.onHide();
         }
     }
     render() {
-        console.log(this.props);
         return (
             <Modal show={this.props.show} onHide={this.props.onHide} bsSize="small" aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
