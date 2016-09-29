@@ -17,17 +17,22 @@ export function addCategoryItem(projectKey, categoryKey, data) {
             title: data,
             key: categoryItemKey
         });
-        // Store ref to category parent
+        // Store item ref to category parent refs
         const categoryRefs = firebase.database().ref('projects').child(projectKey).child('categories').child(categoryKey).child("refs");
         categoryRefs.child(categoryItemKey).set({categoryItemKey});
     }
 }
-export function addItemOption(projectKey, data) {
+export function addItemOption(projectKey, itemKey, data) {
     return function() {
+        // Create new ref and store option data
         const itemOptionsRef = firebase.database().ref('projects').child(projectKey).child('itemOptions');
-        itemOptionsRef.push({
-            title: data
+        const itemOptionsKey = itemOptionsRef.push().key;
+        itemOptionsRef.child(itemOptionsKey).set({
+            data
         });
+        // Store option ref to item parent refs
+        const itemRefs = firebase.database().ref('projects').child(projectKey).child('categoryItems').child(itemKey).child("refs");
+        itemRefs.child(itemOptionsKey).set({itemOptionsKey})
     }
 }
 export function setProjectSettings(projectKey, data) {

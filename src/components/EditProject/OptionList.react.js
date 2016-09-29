@@ -3,7 +3,7 @@ import { Panel, ButtonToolbar, Button, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as optionActions from '../../actions/optionActions';
 
-import ModalNewOption from './Modal/Modal_New_Option';
+import ModalNewItemOption from './Modal/Modal_New_ItemOption';
 import ModalEditOption from './Modal/Modal_Edit_Option';
 import ModalDeleteOption from './Modal/Modal_Delete_Option';
 
@@ -16,14 +16,14 @@ class OptionList extends Component {
     constructor(props){
         super(props);
         this.state = {
-            modalNewOption: false,
+            modalNewItemOption: false,
             modalEditOption: false,
             modalDeleteOption: false
         };
     }
 
     render() {
-        let modalNewOption = () => this.setState({ modalNewOption: false });
+        let modalNewItemOption = () => this.setState({ modalNewItemOption: false });
         let modalEditOption = () => this.setState({ modalEditOption: false });
         let modalDeleteOption = () => this.setState({ modalDeleteOption: false });
         let newOptionHolder = () => {
@@ -31,7 +31,7 @@ class OptionList extends Component {
                 <Col md={12}>
                     <Panel header={`Create option in item: ${this.props.itemSelectedTitle}`}>
                         <ButtonToolbar>
-                            <Button bsStyle="default" onClick={()=>this.setState({ modalNewOption: true })}>+ New Option</Button>
+                            <Button bsStyle="default" onClick={()=>this.setState({ modalNewItemOption: true })}>+ New Option</Button>
                         </ButtonToolbar>
                     </Panel>
                 </Col>
@@ -62,7 +62,7 @@ class OptionList extends Component {
         }
         return (
             <div>
-                <ModalNewOption show={this.state.modalNewOption} onHide={modalNewOption} />
+                <ModalNewItemOption itemKey={this.props.itemKey} show={this.state.modalNewItemOption} onHide={modalNewItemOption} />
                 <ModalEditOption show={this.state.modalEditOption} onHide={modalEditOption} />
                 <ModalDeleteOption show={this.state.modalDeleteOption} onHide={modalDeleteOption} />
                 {newOption}
@@ -73,9 +73,11 @@ class OptionList extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log("state", state);
     return {
         itemSelected: state.options.selected,
         itemSelectedTitle: state.options.itemTitle,
+        itemKey: state.options.itemKey,
         options: state.options.data,
         project: state.project
     };
