@@ -33,10 +33,10 @@ class CategoryList extends Component {
                 return (
                     <Panel key={category} header={categories[category].title} eventKey={category}>
                         <ButtonToolbar>
-                            <Button bsStyle="default" bsSize="xsmall" onClick={()=>this.setState({ modalNewItem: true })}>+ ITEM</Button>
+                            <Button bsStyle="default" onClick={()=>this.setState({ modalNewItem: true })}>+ ITEM</Button>
                         </ButtonToolbar>
                         <br />
-                        <CategoryItemList projectKey={this.props.projectKey} items={categories[category].refs} />
+                        <CategoryItemList items={categories[category].refs} />
                         <br />
                         <ButtonToolbar>
                             <Button bsStyle="danger" bsSize="xsmall" onClick={()=>this.setState({ modalDeleteCategory: true })}>Delete {categories[category].title}</Button>
@@ -54,7 +54,7 @@ class CategoryList extends Component {
                 <ModalDeleteCategory show={this.state.modalDeleteCategory} onHide={modalDeleteCategory} />
                 <Panel header="New Category">
                     <ButtonToolbar>
-                        <Button bsStyle="default" bsSize="small" onClick={()=>this.setState({ modalNewCategory: true })}>+ New Category</Button>
+                        <Button bsStyle="default" onClick={()=>this.setState({ modalNewCategory: true })}>+ New Category</Button>
                     </ButtonToolbar>
                 </Panel>
                 {categoryList}

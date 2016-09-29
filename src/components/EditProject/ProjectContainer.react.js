@@ -6,7 +6,7 @@ class ProjectContainer extends Component {
 
     render() {
         return (
-            <Project projectKey={this.props.projectKey}/>
+            <Project />
         );
     }
 }

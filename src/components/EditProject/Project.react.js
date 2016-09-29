@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Row, Col, ButtonToolbar, Button } from 'react-bootstrap';
 import CategoryList from './CategoryList.react';
 import OptionList from './OptionList.react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import ModalProjectSettings from './Modal/Modal_ProjectSettings';
 import * as updateDataActions from '../../actions/updateDataActions';
@@ -20,10 +21,11 @@ class Project extends Component {
 
         return (
             <Grid>
-                <ModalProjectSettings projectKey={this.props.projectKey} show={this.state.modalProjectSettings} onHide={modalProjectSettings} />
+                <ModalProjectSettings projectKey={this.props.project.projectKey} show={this.state.modalProjectSettings} onHide={modalProjectSettings} />
 
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
+                        <Link to={`/projects`}>Back To Projects</Link>
                         <h2>{this.props.projectSettings.projectName}</h2>
                         <p>{this.props.projectSettings.projectDeadline}</p>
                         <ButtonToolbar>
@@ -32,7 +34,7 @@ class Project extends Component {
                         <br />
                     </Col>
                     <Col xs={12} md={6}>
-                        <CategoryList projectKey={this.props.projectKey} categories={this.props.project.categories}/>
+                        <CategoryList categories={this.props.project.categories}/>
                     </Col>
                     <Col xs={12} md={6}>
                         <OptionList />
@@ -51,6 +53,7 @@ Project.defaultProps = {
 };
 
 function mapStateToProps(state) {
+    console.log(state);
     return {
         project: state.project,
         projectSettings: state.project.projectSettings

@@ -17,7 +17,7 @@ class ItemList extends Component {
     }
 
     getItemOptions(itemKey) {
-        this.props.getOptionListByKey(this.props.projectKey, itemKey);
+        this.props.getOptionListByKey(this.props.project.projectKey, itemKey);
     }
 
     render() {

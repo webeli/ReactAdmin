@@ -26,12 +26,12 @@ class OptionList extends Component {
         let modalNewOption = () => this.setState({ modalNewOption: false });
         let modalEditOption = () => this.setState({ modalEditOption: false });
         let modalDeleteOption = () => this.setState({ modalDeleteOption: false });
-        let newOptionF = () => {
+        let newOptionHolder = () => {
             return (
                 <Col md={12}>
                     <Panel header="New Option">
                         <ButtonToolbar>
-                            <Button bsSize="small" bsStyle="default" onClick={()=>this.setState({ modalNewOption: true })}>+ New Option</Button>
+                            <Button bsStyle="default" onClick={()=>this.setState({ modalNewOption: true })}>+ New Option</Button>
                         </ButtonToolbar>
                     </Panel>
                 </Col>
@@ -44,7 +44,7 @@ class OptionList extends Component {
         let itemOptions = this.props.project.itemOptions;
 
         if (Object.keys(options).length !== 0) {
-            newOption = newOptionF();
+            newOption = newOptionHolder();
             optionList = Object.keys(options).map(option => {
                 return (
                     <Col md={6} key={option}>
