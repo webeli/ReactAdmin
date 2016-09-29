@@ -23,6 +23,7 @@ class OptionList extends Component {
     }
 
     render() {
+        console.log("option props", this.props);
         let modalNewOption = () => this.setState({ modalNewOption: false });
         let modalEditOption = () => this.setState({ modalEditOption: false });
         let modalDeleteOption = () => this.setState({ modalDeleteOption: false });
@@ -42,8 +43,8 @@ class OptionList extends Component {
         let newOption = null;
         let options = this.props.options;
         let itemOptions = this.props.project.itemOptions;
-
-        if (Object.keys(options).length !== 0) {
+        //Object.keys(options).length !== 0
+        if (options) {
             newOption = newOptionHolder();
             optionList = Object.keys(options).map(option => {
                 return (
@@ -75,6 +76,7 @@ class OptionList extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    console.log("state options", state);
     return {
         options: state.options,
         project: state.project

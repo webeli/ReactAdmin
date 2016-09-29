@@ -3,8 +3,8 @@ import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as optionActions from '../../actions/optionActions';
 
-import ModalEditItem from './Modal/Modal_Edit_Item';
-import ModalDeleteItem from './Modal/Modal_Delete_Item';
+import ModalEditItem from './Modal/Modal_Edit_CategoryItem';
+import ModalDeleteItem from './Modal/Modal_Delete_CategoryItem';
 
 class ItemList extends Component {
 
@@ -17,6 +17,7 @@ class ItemList extends Component {
     }
 
     getItemOptions(itemKey) {
+        console.log("itemKey", itemKey);
         this.props.getOptionListByKey(this.props.project.projectKey, itemKey);
     }
 

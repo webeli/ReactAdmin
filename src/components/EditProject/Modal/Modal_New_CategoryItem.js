@@ -3,38 +3,40 @@ import { Modal, Button, ButtonToolbar, Form, FormGroup, FormControl } from 'reac
 import { connect } from 'react-redux';
 import * as updateDataActions from '../../../actions/updateDataActions';
 
-class ModalNewCategory extends Component {
+class ModalNewCategoryItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newCategory: '',
+            newCategoryItem: '',
         };
 
-        this.handleNewCategory = this.handleNewCategory.bind(this);
+        this.handleNewCategoryItem = this.handleNewCategoryItem.bind(this);
     }
 
-    handleNewCategory(e) { this.setState({newCategory: e.target.value}); }
+    handleNewCategoryItem(e) { this.setState({newCategoryItem: e.target.value}); }
 
     addNewCategory(e) {
         e.preventDefault();
-        if (this.state.newCategory !== '') {
-            this.props.addCategory(this.props.project.projectKey, this.state.newCategory);
-            this.setState({newCategory: ''});
+        if (this.state.newCategoryItem !== '') {
+            console.log("Modal_New_CategoryItem", this.props.project.projectKey, this.props.categoryKey, this.state.newCategoryItem);
+            this.props.addCategoryItem(this.props.project.projectKey, this.props.categoryKey, this.state.newCategoryItem);
+            this.setState({newCategoryItem: ''});
             this.props.onHide();
         }
     }
     render() {
+        console.log(this.props);
         return (
             <Modal show={this.props.show} onHide={this.props.onHide} bsSize="small" aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-lg">New Category</Modal.Title>
+                    <Modal.Title id="contained-modal-title-lg">New Category Item</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={this.addNewCategory.bind(this)}>
-                        <FormGroup controlId="newCategory">
-                            <FormControl type="text" placeholder="New Category"
-                                         value={this.state.newCategory}
-                                         onChange={this.handleNewCategory}/>
+                        <FormGroup controlId="newCategoryItem">
+                            <FormControl type="text" placeholder="New Category Item"
+                                         value={this.state.newCategoryItem}
+                                         onChange={this.handleNewCategoryItem}/>
                         </FormGroup>
                         <FormGroup>
                             <ButtonToolbar>
@@ -58,7 +60,7 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        addCategory: (projectKey, data) => dispatch(updateDataActions.addCategory(projectKey, data))
+        addCategoryItem: (projectKey, categoryKey, data) => dispatch(updateDataActions.addCategoryItem(projectKey, categoryKey, data))
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ModalNewCategory);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalNewCategoryItem);

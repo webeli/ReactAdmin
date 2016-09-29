@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import CategoryItemList from './CategoryItemList.react';
 
-import ModalNewItem from './Modal/Modal_New_Item';
+import ModalNewCategoryItem from './Modal/Modal_New_CategoryItem';
 import ModalNewCategory from './Modal/Modal_New_Category';
 import ModalEditCategory from './Modal/Modal_Edit_Category';
 import ModalDeleteCategory from './Modal/Modal_Delete_Category';
@@ -12,15 +12,16 @@ class CategoryList extends Component {
     constructor(props){
         super(props);
         this.state = {
-            modalNewItem: false,
+            modalNewCategoryItem: false,
             modalNewCategory: false,
             modalEditCategory: false,
-            modalDeleteCategory: false
+            modalDeleteCategory: false,
+            categoryKey: null
         };
     }
 
     render() {
-        let modalNewItem = () => this.setState({ modalNewItem: false });
+        let modalNewCategoryItem = () => this.setState({ modalNewCategoryItem: false });
 
         let modalNewCategory = () => this.setState({ modalNewCategory: false });
         let modalEditCategory = () => this.setState({ modalEditCategory: false });
@@ -33,7 +34,7 @@ class CategoryList extends Component {
                 return (
                     <Panel key={category} header={categories[category].title} eventKey={category}>
                         <ButtonToolbar>
-                            <Button bsStyle="default" onClick={()=>this.setState({ modalNewItem: true })}>+ ITEM</Button>
+                            <Button bsStyle="default" onClick={()=>this.setState({ categoryKey:category, modalNewCategoryItem:true })}>+ ITEM</Button>
                         </ButtonToolbar>
                         <br />
                         <CategoryItemList items={categories[category].refs} />
@@ -48,7 +49,7 @@ class CategoryList extends Component {
         }
         return (
             <div>
-                <ModalNewItem show={this.state.modalNewItem} onHide={modalNewItem} />
+                <ModalNewCategoryItem categoryKey={this.state.categoryKey} show={this.state.modalNewCategoryItem} onHide={modalNewCategoryItem} />
                 <ModalNewCategory show={this.state.modalNewCategory} onHide={modalNewCategory} />
                 <ModalEditCategory show={this.state.modalEditCategory} onHide={modalEditCategory} />
                 <ModalDeleteCategory show={this.state.modalDeleteCategory} onHide={modalDeleteCategory} />

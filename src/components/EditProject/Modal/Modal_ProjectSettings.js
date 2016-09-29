@@ -55,7 +55,7 @@ class ModalProjectSettings extends Component {
 
     updateProjectSettings(e) {
         e.preventDefault();
-        this.props.setProjectSettings(this.props.projectKey, this.state);
+        this.props.setProjectSettings(this.props.project.projectKey, this.state);
         this.props.onHide();
     }
 
@@ -132,7 +132,8 @@ class ModalProjectSettings extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        projectSettings: state.project.projectSettings
+        projectSettings: state.project.projectSettings,
+        project: state.project
     };
 }
 function mapDispatchToProps(dispatch) {

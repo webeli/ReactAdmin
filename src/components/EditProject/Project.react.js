@@ -21,7 +21,7 @@ class Project extends Component {
 
         return (
             <Grid>
-                <ModalProjectSettings projectKey={this.props.project.projectKey} show={this.state.modalProjectSettings} onHide={modalProjectSettings} />
+                <ModalProjectSettings show={this.state.modalProjectSettings} onHide={modalProjectSettings} />
 
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
@@ -53,7 +53,6 @@ Project.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    console.log(state);
     return {
         project: state.project,
         projectSettings: state.project.projectSettings
