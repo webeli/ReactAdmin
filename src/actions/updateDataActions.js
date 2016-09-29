@@ -26,7 +26,6 @@ export function addItemOption(projectKey, title) {
 }
 export function setProjectSettings(projectKey, data) {
     return function() {
-        console.log(data);
         const projectSettingsRef = firebase.database().ref('projects').child(projectKey).child('projectSettings');
         projectSettingsRef.set({...data});
     }

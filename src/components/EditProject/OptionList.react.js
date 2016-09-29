@@ -3,6 +3,7 @@ import { Panel, ButtonToolbar, Button, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as optionActions from '../../actions/optionActions';
 
+import ModalNewOption from './Modal/Modal_New_Option';
 import ModalEditOption from './Modal/Modal_Edit_Option';
 import ModalDeleteOption from './Modal/Modal_Delete_Option';
 
@@ -15,19 +16,35 @@ class OptionList extends Component {
     constructor(props){
         super(props);
         this.state = {
+            modalNewOption: false,
             modalEditOption: false,
             modalDeleteOption: false
         };
     }
 
     render() {
+        let modalNewOption = () => this.setState({ modalNewOption: false });
         let modalEditOption = () => this.setState({ modalEditOption: false });
         let modalDeleteOption = () => this.setState({ modalDeleteOption: false });
+        let newOptionF = () => {
+            return (
+                <Col md={12}>
+                    <Panel header="New Option">
+                        <ButtonToolbar>
+                            <Button bsSize="small" bsStyle="default" onClick={()=>this.setState({ modalNewOption: true })}>+ New Option</Button>
+                        </ButtonToolbar>
+                    </Panel>
+                </Col>
+            )
+        };
 
         let optionList = null;
+        let newOption = null;
         let options = this.props.options;
         let itemOptions = this.props.project.itemOptions;
-        if (options) {
+
+        if (Object.keys(options).length !== 0) {
+            newOption = newOptionF();
             optionList = Object.keys(options).map(option => {
                 return (
                     <Col md={6} key={option}>
@@ -47,8 +64,10 @@ class OptionList extends Component {
         }
         return (
             <div>
+                <ModalNewOption show={this.state.modalNewOption} onHide={modalNewOption} />
                 <ModalEditOption show={this.state.modalEditOption} onHide={modalEditOption} />
                 <ModalDeleteOption show={this.state.modalDeleteOption} onHide={modalDeleteOption} />
+                {newOption}
                 {optionList}
             </div>
         );
