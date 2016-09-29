@@ -63,7 +63,12 @@ class Project extends Component {
     }
 }
 
-function mapStateToProps(state, ownProps) {
+Project.defaultProps = { projectSettings: {
+    projectName: 'No Project name',
+    projectDeadline: 'No deadline'
+}};
+
+function mapStateToProps(state) {
     return {
         project: state.project,
         projectSettings: state.project.projectSettings

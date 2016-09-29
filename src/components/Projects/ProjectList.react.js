@@ -7,7 +7,6 @@ import * as projectActions from '../../actions/projectActions';
 class ProjectList extends Component {
 
     loadProject(key) {
-        console.log(key);
         this.props.getProjectByKey(key);
     }
 
