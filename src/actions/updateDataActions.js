@@ -1,10 +1,10 @@
 import * as firebase from 'firebase';
 
-export function uploadImage(file) {
-    console.log("file", file);
-    const storageRef = firebase.storage().ref();
-    storageRef.put(file).then(function(snapshot) {
+export function uploadImage(files, itemKey) {
+    const storageRef = firebase.storage().ref("images").child(itemKey).child(files[0].name);
+    storageRef.put(files[0]).then(function(snapshot) {
         console.log('Uploaded a blob or file!', snapshot);
+        console.log('URL', snapshot.a.downloadURLs[0]);
     });
 }
 export function addProject(data) {

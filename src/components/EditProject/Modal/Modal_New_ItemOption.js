@@ -15,7 +15,8 @@ class ModalNewItemOption extends Component {
             desc: '',
             image: '',
             price: '',
-            title: ''
+            title: '',
+            files: {}
         };
         this.handleActiveChange = this.handleActiveChange.bind(this);
         this.handleAttributeChange = this.handleAttributeChange.bind(this);
@@ -33,28 +34,38 @@ class ModalNewItemOption extends Component {
     handleTitleChange (e) { this.setState({title: e.target.value}); }
 
     onDrop(files) {
-        console.log('Received files: ', files);
-        const storageRef = firebase.storage().ref("test");
-        storageRef.put(files[0]).then(function(snapshot) {
-            console.log('Uploaded a blob or file!', snapshot);
-            console.log('URL', snapshot.a.downloadURLs[0]);
+        this.setState({
+            files: files[0]
         });
     }
 
     createItemOption(e) {
         e.preventDefault();
-        console.log("Create option", this.state);
-        this.props.addItemOption(this.props.project.projectKey, this.props.itemKey, this.state);
-        this.setState({
-            active: true,
-            attribute: '',
-            default: '',
-            desc: '',
-            image: '',
-            price: '',
-            title: ''
+
+        const storageRef = firebase.storage().ref("images").child(this.props.itemKey).child(this.state.files.name);
+        storageRef.put(this.state.files).then(function(snapshot) {
+            console.log('Uploaded a blob or file!', snapshot);
+            console.log('URL', snapshot.a.downloadURLs[0]);
+
+            this.setState({
+                image: snapshot.a.downloadURLs[0],
+                files: ''
+            });
+
+            console.log("this.props", this.props);
+            this.props.addItemOption(this.props.project.projectKey, this.props.itemKey, this.state);
+            this.setState({
+                active: true,
+                attribute: '',
+                default: '',
+                desc: '',
+                image: '',
+                price: '',
+                title: ''
+            });
+            this.props.onHide();
         });
-        this.props.onHide();
+
     }
 
     render() {
@@ -88,7 +99,7 @@ class ModalNewItemOption extends Component {
                                              onChange={this.handleDescChange}/>
                             </FormGroup>
                             <FormGroup controlId="image">
-                                <Dropzone onDrop={this.onDrop}>
+                                <Dropzone onDrop={this.onDrop.bind(this)}>
                                     <div>Try dropping some files here, or click to select files to upload.</div>
                                 </Dropzone>
                             </FormGroup>
@@ -126,7 +137,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         addItemOption: (projectKey, itemKey, data) => dispatch(updateDataActions.addItemOption(projectKey, itemKey, data)),
-        uploadImage: (file) => dispatch(updateDataActions.uploadImage(file))
+        uploadImage: (files, itemKey) => dispatch(updateDataActions.uploadImage(files, itemKey))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ModalNewItemOption);
