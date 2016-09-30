@@ -1,5 +1,12 @@
 import * as firebase from 'firebase';
 
+export function uploadImage(file) {
+    console.log("file", file);
+    const storageRef = firebase.storage().ref();
+    storageRef.put(file).then(function(snapshot) {
+        console.log('Uploaded a blob or file!', snapshot);
+    });
+}
 export function addProject(data) {
     return function() {
         const projectsRef = firebase.database().ref('projects');
@@ -14,7 +21,7 @@ export function addCategory(projectKey, data) {
     return function() {
         const categoriesRef = firebase.database().ref('projects').child(projectKey).child('categories');
         categoriesRef.push({
-            projectName: data
+            title: data
         });
     }
 }

@@ -89,22 +89,22 @@ class ModalProjectSettings extends Component {
                                              onChange={this.handleCompanyStreet}/>
                             </FormGroup>
                             <FormGroup controlId="companyWebsite">
-                                <FormControl type="text" placeholder="companyWebsite"
+                                <FormControl type="url" placeholder="companyWebsite"
                                              value={this.state.companyWebsite}
                                              onChange={this.handleCompanyWebsite}/>
                             </FormGroup>
                             <FormGroup controlId="companyZip">
-                                <FormControl type="text" placeholder="companyZip"
+                                <FormControl type="number" placeholder="companyZip"
                                              value={this.state.companyZip}
                                              onChange={this.handleCompanyZip}/>
                             </FormGroup>
                             <FormGroup controlId="projectDeadline">
-                                <FormControl type="text" placeholder="projectDeadline"
+                                <FormControl type="date" placeholder="projectDeadline"
                                              value={this.state.projectDeadline}
                                              onChange={this.handleProjectDeadline}/>
                             </FormGroup>
                             <FormGroup controlId="projectEmail">
-                                <FormControl type="text" placeholder="projectEmail"
+                                <FormControl type="email" placeholder="projectEmail"
                                              value={this.state.projectEmail}
                                              onChange={this.handleProjectEmail}/>
                             </FormGroup>

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Modal, Button, ButtonToolbar, Form, FormGroup, FormControl, Col } from 'react-bootstrap';
+import { Modal, Button, ButtonToolbar, Form, FormGroup, FormControl, Col, Checkbox } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as updateDataActions from '../../../actions/updateDataActions';
+import Dropzone from 'react-dropzone';
+import * as firebase from 'firebase';
 
 class ModalNewItemOption extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            active: '',
+            active: true,
             attribute: '',
             default: '',
             desc: '',
@@ -19,25 +21,32 @@ class ModalNewItemOption extends Component {
         this.handleAttributeChange = this.handleAttributeChange.bind(this);
         this.handleDefaultChange = this.handleDefaultChange.bind(this);
         this.handleDescChange = this.handleDescChange.bind(this);
-        this.handleImageChange = this.handleImageChange.bind(this);
         this.handlePriceChange = this.handlePriceChange.bind(this);
         this.handleTitleChange = this.handleTitleChange.bind(this);
     }
 
-    handleActiveChange(e) { this.setState({active: e.target.value}); }
+    handleActiveChange(e) { this.setState({active: e.target.checked}); }
     handleAttributeChange (e) { this.setState({attribute: e.target.value}); }
     handleDefaultChange (e) { this.setState({default: e.target.value}); }
     handleDescChange (e) { this.setState({desc: e.target.value}); }
-    handleImageChange (e) { this.setState({image: e.target.value}); }
     handlePriceChange (e) { this.setState({price: e.target.value}); }
     handleTitleChange (e) { this.setState({title: e.target.value}); }
+
+    onDrop(files) {
+        console.log('Received files: ', files);
+        const storageRef = firebase.storage().ref("test");
+        storageRef.put(files[0]).then(function(snapshot) {
+            console.log('Uploaded a blob or file!', snapshot);
+            console.log('URL', snapshot.a.downloadURLs[0]);
+        });
+    }
 
     createItemOption(e) {
         e.preventDefault();
         console.log("Create option", this.state);
         this.props.addItemOption(this.props.project.projectKey, this.props.itemKey, this.state);
         this.setState({
-            active: '',
+            active: true,
             attribute: '',
             default: '',
             desc: '',
@@ -49,6 +58,7 @@ class ModalNewItemOption extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large" aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
@@ -58,9 +68,9 @@ class ModalNewItemOption extends Component {
                     <Col>
                         <Form onSubmit={this.createItemOption.bind(this)}>
                             <FormGroup controlId="active">
-                                <FormControl type="text" placeholder="active"
-                                             value={this.state.active}
-                                             onChange={this.handleActiveChange}/>
+                                <Checkbox type="checkbox" checked={this.state.active} onChange={this.handleActiveChange}>
+                                    Active
+                                </Checkbox>
                             </FormGroup>
                             <FormGroup controlId="attribute">
                                 <FormControl type="text" placeholder="attribute"
@@ -78,19 +88,19 @@ class ModalNewItemOption extends Component {
                                              onChange={this.handleDescChange}/>
                             </FormGroup>
                             <FormGroup controlId="image">
-                                <FormControl type="text" placeholder="image"
-                                             value={this.state.image}
-                                             onChange={this.handleImageChange}/>
+                                <Dropzone onDrop={this.onDrop}>
+                                    <div>Try dropping some files here, or click to select files to upload.</div>
+                                </Dropzone>
                             </FormGroup>
                             <FormGroup controlId="price">
-                                <FormControl type="text" placeholder="price"
+                                <FormControl type="number" placeholder="price"
                                              value={this.state.price}
-                                             onChange={this.handlePriceChange}/>
+                                             onChange={this.handlePriceChange} required/>
                             </FormGroup>
                             <FormGroup controlId="title">
                                 <FormControl type="text" placeholder="title"
                                              value={this.state.title}
-                                             onChange={this.handleTitleChange}/>
+                                             onChange={this.handleTitleChange} required/>
                             </FormGroup>
                             <FormGroup>
                                 <ButtonToolbar>
@@ -115,7 +125,8 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        addItemOption: (projectKey, itemKey, data) => dispatch(updateDataActions.addItemOption(projectKey, itemKey, data))
+        addItemOption: (projectKey, itemKey, data) => dispatch(updateDataActions.addItemOption(projectKey, itemKey, data)),
+        uploadImage: (file) => dispatch(updateDataActions.uploadImage(file))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ModalNewItemOption);
