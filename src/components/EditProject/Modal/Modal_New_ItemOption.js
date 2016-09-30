@@ -12,7 +12,6 @@ class ModalNewItemOption extends Component {
             default: '',
             desc: '',
             image: '',
-            key: '',
             price: '',
             title: ''
         };
@@ -21,7 +20,6 @@ class ModalNewItemOption extends Component {
         this.handleDefaultChange = this.handleDefaultChange.bind(this);
         this.handleDescChange = this.handleDescChange.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
-        this.handleKeyChange = this.handleKeyChange.bind(this);
         this.handlePriceChange = this.handlePriceChange.bind(this);
         this.handleTitleChange = this.handleTitleChange.bind(this);
     }
@@ -31,7 +29,6 @@ class ModalNewItemOption extends Component {
     handleDefaultChange (e) { this.setState({default: e.target.value}); }
     handleDescChange (e) { this.setState({desc: e.target.value}); }
     handleImageChange (e) { this.setState({image: e.target.value}); }
-    handleKeyChange (e) { this.setState({key: e.target.value}); }
     handlePriceChange (e) { this.setState({price: e.target.value}); }
     handleTitleChange (e) { this.setState({title: e.target.value}); }
 
@@ -45,7 +42,6 @@ class ModalNewItemOption extends Component {
             default: '',
             desc: '',
             image: '',
-            key: '',
             price: '',
             title: ''
         });
@@ -85,11 +81,6 @@ class ModalNewItemOption extends Component {
                                 <FormControl type="text" placeholder="image"
                                              value={this.state.image}
                                              onChange={this.handleImageChange}/>
-                            </FormGroup>
-                            <FormGroup controlId="key">
-                                <FormControl type="text" placeholder="key"
-                                             value={this.state.key}
-                                             onChange={this.handleKeyChange}/>
                             </FormGroup>
                             <FormGroup controlId="price">
                                 <FormControl type="text" placeholder="price"

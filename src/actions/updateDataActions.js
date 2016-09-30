@@ -1,10 +1,20 @@
 import * as firebase from 'firebase';
 
+export function addProject(data) {
+    return function() {
+        const projectsRef = firebase.database().ref('projects');
+        projectsRef.push({
+            projectSettings: {
+                projectName: data
+            }
+        });
+    }
+}
 export function addCategory(projectKey, data) {
     return function() {
         const categoriesRef = firebase.database().ref('projects').child(projectKey).child('categories');
         categoriesRef.push({
-            title: data
+            projectName: data
         });
     }
 }
@@ -28,7 +38,8 @@ export function addItemOption(projectKey, itemKey, data) {
         const itemOptionsRef = firebase.database().ref('projects').child(projectKey).child('itemOptions');
         const itemOptionsKey = itemOptionsRef.push().key;
         itemOptionsRef.child(itemOptionsKey).set({
-            data
+            ...data,
+            key:itemOptionsKey
         });
         // Store option ref to item parent refs
         const itemRefs = firebase.database().ref('projects').child(projectKey).child('categoryItems').child(itemKey).child("refs");
