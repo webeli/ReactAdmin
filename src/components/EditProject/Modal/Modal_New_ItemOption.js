@@ -13,7 +13,6 @@ class ModalNewItemOption extends Component {
             attribute: '',
             default: '',
             desc: '',
-            image: '',
             price: '',
             title: '',
             files: {}
@@ -39,37 +38,34 @@ class ModalNewItemOption extends Component {
         });
     }
 
+    // Callback when file is uploaded
+    uploadComplete(imgUrl) {
+        this.setState({
+            image: imgUrl
+        });
+        this.props.addItemOption(this.props.project.projectKey, this.props.itemKey, this.state);
+        this.setState({
+            active: true,
+            attribute: '',
+            default: '',
+            desc: '',
+            price: '',
+            title: '',
+            files: {}
+        });
+        this.props.onHide();
+    };
+
     createItemOption(e) {
         e.preventDefault();
-
-        const storageRef = firebase.storage().ref("images").child(this.props.itemKey).child(this.state.files.name);
-        storageRef.put(this.state.files).then(function(snapshot) {
-            console.log('Uploaded a blob or file!', snapshot);
-            console.log('URL', snapshot.a.downloadURLs[0]);
-
-            this.setState({
-                image: snapshot.a.downloadURLs[0],
-                files: ''
-            });
-
-            console.log("this.props", this.props);
-            this.props.addItemOption(this.props.project.projectKey, this.props.itemKey, this.state);
-            this.setState({
-                active: true,
-                attribute: '',
-                default: '',
-                desc: '',
-                image: '',
-                price: '',
-                title: ''
-            });
-            this.props.onHide();
+        // Create ref and upload image to (ProjectKey -> ItemTitle -> Filename)
+        const storageRef = firebase.storage().ref(this.props.project.projectKey).child(this.props.itemSelectedTitle).child(this.state.files.name);
+        storageRef.put(this.state.files).then((snapshot) => {
+            this.uploadComplete(snapshot.a.downloadURLs[0]);
         });
-
     }
 
     render() {
-        console.log(this.props);
         return (
             <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large" aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
@@ -98,10 +94,11 @@ class ModalNewItemOption extends Component {
                                              value={this.state.desc}
                                              onChange={this.handleDescChange}/>
                             </FormGroup>
-                            <FormGroup controlId="image">
+                            <FormGroup controlId="uploadImage">
                                 <Dropzone onDrop={this.onDrop.bind(this)}>
                                     <div>Try dropping some files here, or click to select files to upload.</div>
                                 </Dropzone>
+                                <img src={this.state.files.preview} height="50px" width="50px" alt="img"/>
                             </FormGroup>
                             <FormGroup controlId="price">
                                 <FormControl type="number" placeholder="price"

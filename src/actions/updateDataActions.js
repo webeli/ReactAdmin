@@ -45,8 +45,14 @@ export function addItemOption(projectKey, itemKey, data) {
         const itemOptionsRef = firebase.database().ref('projects').child(projectKey).child('itemOptions');
         const itemOptionsKey = itemOptionsRef.push().key;
         itemOptionsRef.child(itemOptionsKey).set({
-            ...data,
-            key:itemOptionsKey
+            active: data.active,
+            attribute: data.attribute,
+            default: data.default,
+            desc: data.desc,
+            image: data.image,
+            price: data.price,
+            title: data.title,
+            key: itemOptionsKey
         });
         // Store option ref to item parent refs
         const itemRefs = firebase.database().ref('projects').child(projectKey).child('categoryItems').child(itemKey).child("refs");

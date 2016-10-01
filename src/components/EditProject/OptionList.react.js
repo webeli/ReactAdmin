@@ -62,7 +62,7 @@ class OptionList extends Component {
         }
         return (
             <div>
-                <ModalNewItemOption itemKey={this.props.itemKey} show={this.state.modalNewItemOption} onHide={modalNewItemOption} />
+                <ModalNewItemOption itemSelectedTitle={this.props.itemSelectedTitle} itemKey={this.props.itemKey} show={this.state.modalNewItemOption} onHide={modalNewItemOption} />
                 <ModalEditOption show={this.state.modalEditOption} onHide={modalEditOption} />
                 <ModalDeleteOption show={this.state.modalDeleteOption} onHide={modalDeleteOption} />
                 {newOption}
@@ -73,7 +73,6 @@ class OptionList extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log("state", state);
     return {
         itemSelected: state.options.selected,
         itemSelectedTitle: state.options.itemTitle,
