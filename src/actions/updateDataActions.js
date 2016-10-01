@@ -60,9 +60,6 @@ export function addItemOption(projectKey, itemKey, data) {
     }
 }
 export function setItemOption(projectKey, optionKey, data) {
-    console.log("hmm", projectKey);
-    console.log("hmm2", optionKey);
-    console.log("hmm3", data);
     return function() {
         // Create new ref and store option data
         const itemOptionRef = firebase.database().ref('projects').child(projectKey).child('itemOptions').child(optionKey);

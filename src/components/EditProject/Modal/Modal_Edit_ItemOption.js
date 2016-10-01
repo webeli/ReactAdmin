@@ -78,7 +78,6 @@ class ModalEditItemOption extends Component {
     }
 
     render() {
-        console.log("state", this.state);
         return (
             <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large" aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
