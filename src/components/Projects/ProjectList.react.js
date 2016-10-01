@@ -30,8 +30,8 @@ class ProjectList extends Component {
                         <p>Description</p>
                         <ButtonToolbar>
                             <Button bsStyle="danger">Delete</Button>
-                            <Button onClick={()=>this.loadProject(project)} bsStyle="primary"><Link style={{color:'#FFF'}} to={`/editproject/${project}`}>Manage</Link></Button>
-                            <Button bsStyle="default">View</Button>
+                            <Link style={{color:'#FFF'}} to={`/editproject/${project}`}><Button onClick={()=>this.loadProject(project)} bsStyle="primary">Manage</Button></Link>
+                            <a href={`https://tival.se/#/project/${project}`}><Button bsStyle="default">View</Button></a>
                         </ButtonToolbar>
                     </Thumbnail>
                 </Col>
