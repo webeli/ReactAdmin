@@ -35,6 +35,20 @@ class ModalEditItemOption extends Component {
     handlePriceChange (e) { this.setState({price: e.target.value}); }
     handleTitleChange (e) { this.setState({title: e.target.value}); }
 
+    componentWillReceiveProps(nextProps) {
+        const option = nextProps.option;
+        this.setState({
+            active: option.active,
+            attribute: option.attribute,
+            default: option.default,
+            desc: option.desc,
+            price: option.price,
+            title: option.title,
+            image: option.image,
+            files: {}
+        });
+    }
+
     onDrop(files) {
         this.setState({
             files: files[0]
@@ -46,20 +60,25 @@ class ModalEditItemOption extends Component {
         this.setState({
             image: imgUrl
         });
-        this.props.addItemOption(this.props.project.projectKey, this.props.itemKey, this.state);
+        this.props.setItemOption(this.props.project.projectKey, this.props.option.key, this.state);
         this.props.onHide();
     };
 
     createItemOption(e) {
         e.preventDefault();
-        // Create ref and upload image to (ProjectKey -> ItemTitle -> Filename)
-        const storageRef = firebase.storage().ref(this.props.project.projectKey).child(this.props.itemSelectedTitle).child(this.state.files.name);
-        storageRef.put(this.state.files).then((snapshot) => {
-            this.uploadComplete(snapshot.a.downloadURLs[0]);
-        });
+        if (this.state.files.name) {
+            // Create ref and upload image to (ProjectKey -> ItemTitle -> Filename)
+            const storageRef = firebase.storage().ref(this.props.project.projectKey).child(this.props.itemSelectedTitle).child(this.state.files.name);
+            storageRef.put(this.state.files).then((snapshot) => {
+                this.uploadComplete(snapshot.a.downloadURLs[0]);
+            });
+        } else {
+            this.uploadComplete(this.state.image);
+        }
     }
 
     render() {
+        console.log("state", this.state);
         return (
             <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large" aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
@@ -120,19 +139,6 @@ class ModalEditItemOption extends Component {
     }
 }
 
-/*ModalEditItemOption.defaultProps = {
-    option: {
-        active: true,
-        attribute: '',
-        default: '',
-        desc: '',
-        price: '',
-        title: '',
-        image: '',
-        files: {}
-    }
-};*/
-
 function mapStateToProps(state, ownProps) {
     return {
         project: state.project,
@@ -141,7 +147,7 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        addItemOption: (projectKey, itemKey, data) => dispatch(updateDataActions.addItemOption(projectKey, itemKey, data)),
+        setItemOption: (projectKey, optionKey, data) => dispatch(updateDataActions.setItemOption(projectKey, optionKey, data)),
         uploadImage: (files, itemKey) => dispatch(updateDataActions.uploadImage(files, itemKey))
     }
 }

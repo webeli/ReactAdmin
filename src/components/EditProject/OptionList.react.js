@@ -71,7 +71,7 @@ class OptionList extends Component {
         return (
             <div>
                 <ModalNewItemOption itemSelectedTitle={this.props.itemSelectedTitle} itemKey={this.props.itemKey} show={this.state.modalNewItemOption} onHide={modalNewItemOption} />
-                <ModalEditItemOption selectedItemOption={this.state.selectedItemOption} show={this.state.modalEditItemOption} onHide={modalEditItemOption} />
+                <ModalEditItemOption itemSelectedTitle={this.props.itemSelectedTitle} itemKey={this.props.itemKey} show={this.state.modalEditItemOption} onHide={modalEditItemOption} />
                 <ModalDeleteOption show={this.state.modalDeleteOption} onHide={modalDeleteOption} />
                 {newOption}
                 {optionList}
