@@ -30,7 +30,7 @@ class ModalEditItemOption extends Component {
 
     handleActiveChange(e) { this.setState({active: e.target.checked}); }
     handleAttributeChange (e) { this.setState({attribute: e.target.value}); }
-    handleDefaultChange (e) { this.setState({default: e.target.value}); }
+    handleDefaultChange (e) { this.setState({default: e.target.checked}); }
     handleDescChange (e) { this.setState({desc: e.target.value}); }
     handlePriceChange (e) { this.setState({price: e.target.value}); }
     handleTitleChange (e) { this.setState({title: e.target.value}); }
@@ -91,36 +91,45 @@ class ModalEditItemOption extends Component {
                                     Active
                                 </Checkbox>
                             </FormGroup>
+                            <FormGroup controlId="active">
+                                <Checkbox type="checkbox" checked={this.state.default} onChange={this.handleDefaultChange}>
+                                    Default
+                                </Checkbox>
+                            </FormGroup>
+                            <FormGroup controlId="title">
+                                <FormControl type="text" placeholder="Title"
+                                             value={this.state.title}
+                                             onChange={this.handleTitleChange} required/>
+                            </FormGroup>
+                            <FormGroup controlId="price">
+                                <FormControl type="number" placeholder="Price"
+                                             value={this.state.price}
+                                             onChange={this.handlePriceChange} required/>
+                            </FormGroup>
                             <FormGroup controlId="attribute">
-                                <FormControl type="text" placeholder="attribute"
+                                <FormControl type="text" placeholder="Attribute"
                                              value={this.state.attribute}
                                              onChange={this.handleAttributeChange}/>
                             </FormGroup>
-                            <FormGroup controlId="default">
-                                <FormControl type="text" placeholder="default"
-                                             value={this.state.default}
-                                             onChange={this.handleDefaultChange}/>
-                            </FormGroup>
                             <FormGroup controlId="desc">
-                                <FormControl type="text" placeholder="desc"
+                                <FormControl type="text" placeholder="Description"
                                              value={this.state.desc}
                                              onChange={this.handleDescChange}/>
                             </FormGroup>
                             <FormGroup controlId="uploadImage">
-                                <Dropzone onDrop={this.onDrop.bind(this)}>
-                                    <div>Try dropping some files here, or click to select files to upload.</div>
+                                <Dropzone style={{
+                                    margin:"15px 0 15px",
+                                    padding:"15px",
+                                    width:"160px",
+                                    height:"90px",
+                                    background:"#313131",
+                                    color:"#FFF",
+                                    border:"1px solid #000 dashed"
+                                    }} onDrop={this.onDrop.bind(this)}>
+                                    <div>Drop files here, or click to select files to upload</div>
                                 </Dropzone>
+                                <img src={this.state.image} height="80px" width="80px" alt="Current"/>
                                 <img src={this.state.files.preview} height="80px" width="80px" alt="Preview"/>
-                            </FormGroup>
-                            <FormGroup controlId="price">
-                                <FormControl type="number" placeholder="price"
-                                             value={this.state.price}
-                                             onChange={this.handlePriceChange} required/>
-                            </FormGroup>
-                            <FormGroup controlId="title">
-                                <FormControl type="text" placeholder="title"
-                                             value={this.state.title}
-                                             onChange={this.handleTitleChange} required/>
                             </FormGroup>
                             <FormGroup>
                                 <ButtonToolbar>

@@ -1,12 +1,5 @@
 import * as firebase from 'firebase';
 
-export function uploadImage(files, itemKey) {
-    const storageRef = firebase.storage().ref("images").child(itemKey).child(files[0].name);
-    storageRef.put(files[0]).then(function(snapshot) {
-        console.log('Uploaded a blob or file!', snapshot);
-        console.log('URL', snapshot.a.downloadURLs[0]);
-    });
-}
 export function addProject(data) {
     return function() {
         const projectsRef = firebase.database().ref('projects');
@@ -36,7 +29,7 @@ export function addCategoryItem(projectKey, categoryKey, data) {
         });
         // Store item ref to category parent refs
         const categoryRefs = firebase.database().ref('projects').child(projectKey).child('categories').child(categoryKey).child("refs");
-        categoryRefs.child(categoryItemKey).set({categoryItemKey});
+        categoryRefs.child(categoryItemKey).set(categoryItemKey);
     }
 }
 export function addItemOption(projectKey, itemKey, data) {
@@ -50,13 +43,13 @@ export function addItemOption(projectKey, itemKey, data) {
             default: data.default,
             desc: data.desc,
             image: data.image,
-            price: data.price,
+            price: Number(data.price),
             title: data.title,
             key: itemOptionsKey
         });
         // Store option ref to item parent refs
         const itemRefs = firebase.database().ref('projects').child(projectKey).child('categoryItems').child(itemKey).child("refs");
-        itemRefs.child(itemOptionsKey).set({itemOptionsKey})
+        itemRefs.child(itemOptionsKey).set(itemOptionsKey)
     }
 }
 export function setItemOption(projectKey, optionKey, data) {
@@ -69,7 +62,7 @@ export function setItemOption(projectKey, optionKey, data) {
             default: data.default,
             desc: data.desc,
             image: data.image,
-            price: data.price,
+            price: Number(data.price),
             title: data.title,
             key: optionKey
         });
