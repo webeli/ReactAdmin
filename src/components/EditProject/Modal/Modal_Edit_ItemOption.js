@@ -5,18 +5,21 @@ import * as updateDataActions from '../../../actions/updateDataActions';
 import Dropzone from 'react-dropzone';
 import * as firebase from 'firebase';
 
-class ModalNewItemOption extends Component {
+class ModalEditItemOption extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            active: true,
+            active: '',
             attribute: '',
             default: '',
             desc: '',
             price: '',
             title: '',
+            image: '',
             files: {}
         };
+
         this.handleActiveChange = this.handleActiveChange.bind(this);
         this.handleAttributeChange = this.handleAttributeChange.bind(this);
         this.handleDefaultChange = this.handleDefaultChange.bind(this);
@@ -44,15 +47,6 @@ class ModalNewItemOption extends Component {
             image: imgUrl
         });
         this.props.addItemOption(this.props.project.projectKey, this.props.itemKey, this.state);
-        this.setState({
-            active: true,
-            attribute: '',
-            default: '',
-            desc: '',
-            price: '',
-            title: '',
-            files: {}
-        });
         this.props.onHide();
     };
 
@@ -69,7 +63,7 @@ class ModalNewItemOption extends Component {
         return (
             <Modal show={this.props.show} onHide={this.props.onHide} bsSize="large" aria-labelledby="contained-modal-title-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-lg">Create New Option</Modal.Title>
+                    <Modal.Title id="contained-modal-title-lg">Edit Option</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Col>
@@ -112,7 +106,7 @@ class ModalNewItemOption extends Component {
                             </FormGroup>
                             <FormGroup>
                                 <ButtonToolbar>
-                                    <Button bsStyle="primary" type="submit">Create</Button>
+                                    <Button bsStyle="primary" type="submit">Update</Button>
                                 </ButtonToolbar>
                             </FormGroup>
                         </Form>
@@ -126,9 +120,23 @@ class ModalNewItemOption extends Component {
     }
 }
 
+/*ModalEditItemOption.defaultProps = {
+    option: {
+        active: true,
+        attribute: '',
+        default: '',
+        desc: '',
+        price: '',
+        title: '',
+        image: '',
+        files: {}
+    }
+};*/
+
 function mapStateToProps(state, ownProps) {
     return {
-        project: state.project
+        project: state.project,
+        option: state.option
     };
 }
 function mapDispatchToProps(dispatch) {
@@ -137,4 +145,4 @@ function mapDispatchToProps(dispatch) {
         uploadImage: (files, itemKey) => dispatch(updateDataActions.uploadImage(files, itemKey))
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ModalNewItemOption);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEditItemOption);

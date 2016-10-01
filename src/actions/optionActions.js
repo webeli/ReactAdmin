@@ -15,6 +15,13 @@ export function clearOptionListSuccess(data) {
     }
 }
 
+export function setSelectedOptionSuccess(data) {
+    return {
+        type: 'SET_SELECTED_OPTION',
+        payload: {...data}
+    }
+}
+
 export function getOptionListByKey(projectKey, itemKey, itemTitle) {
     return function(dispatch) {
         const optionListRefs = firebase.database().ref('projects').child(projectKey).child('categoryItems').child(itemKey).child('refs');
@@ -27,5 +34,13 @@ export function getOptionListByKey(projectKey, itemKey, itemTitle) {
 export function clearOptionList() {
     return function(dispatch) {
         dispatch(clearOptionListSuccess({}));
+    }
+}
+
+export function setSelectedOption(optionKey) {
+    return function(dispatch, getState) {
+        const state = getState();
+        const option = state.project.itemOptions[optionKey];
+        dispatch(setSelectedOptionSuccess({...option}));
     }
 }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as optionActions from '../../actions/optionActions';
 
 import ModalNewItemOption from './Modal/Modal_New_ItemOption';
-import ModalEditOption from './Modal/Modal_Edit_Option';
+import ModalEditItemOption from './Modal/Modal_Edit_ItemOption';
 import ModalDeleteOption from './Modal/Modal_Delete_Option';
 
 class OptionList extends Component {
@@ -17,14 +17,22 @@ class OptionList extends Component {
         super(props);
         this.state = {
             modalNewItemOption: false,
-            modalEditOption: false,
-            modalDeleteOption: false
+            modalEditItemOption: false,
+            modalDeleteOption: false,
+            selectedItemOption: ''
         };
+    }
+
+    setSelectedOption(option) {
+        this.props.setSelectedOption(option);
+        this.setState({
+            modalEditItemOption: true
+        })
     }
 
     render() {
         let modalNewItemOption = () => this.setState({ modalNewItemOption: false });
-        let modalEditOption = () => this.setState({ modalEditOption: false });
+        let modalEditItemOption = () => this.setState({ modalEditItemOption: false });
         let modalDeleteOption = () => this.setState({ modalDeleteOption: false });
         let newOptionHolder = () => {
             return (
@@ -53,7 +61,7 @@ class OptionList extends Component {
                             <p></p>
                             <ButtonToolbar>
                                 <Button bsSize="xsmall" bsStyle="danger" onClick={()=>this.setState({ modalDeleteOption: true })}>Delete</Button>
-                                <Button bsSize="xsmall" bsStyle="primary" onClick={()=>this.setState({ modalEditOption: true })}>Edit</Button>
+                                <Button bsSize="xsmall" bsStyle="primary" onClick={this.setSelectedOption.bind(this, option)}>Edit</Button>
                             </ButtonToolbar>
                         </Panel>
                     </Col>
@@ -63,7 +71,7 @@ class OptionList extends Component {
         return (
             <div>
                 <ModalNewItemOption itemSelectedTitle={this.props.itemSelectedTitle} itemKey={this.props.itemKey} show={this.state.modalNewItemOption} onHide={modalNewItemOption} />
-                <ModalEditOption show={this.state.modalEditOption} onHide={modalEditOption} />
+                <ModalEditItemOption selectedItemOption={this.state.selectedItemOption} show={this.state.modalEditItemOption} onHide={modalEditItemOption} />
                 <ModalDeleteOption show={this.state.modalDeleteOption} onHide={modalDeleteOption} />
                 {newOption}
                 {optionList}
@@ -83,7 +91,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        clearOptionList: () => dispatch(optionActions.clearOptionList())
+        clearOptionList: () => dispatch(optionActions.clearOptionList()),
+        setSelectedOption: (optionKey) => dispatch(optionActions.setSelectedOption(optionKey))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(OptionList);
