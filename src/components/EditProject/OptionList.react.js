@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Panel, ButtonToolbar, Button, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as optionActions from '../../actions/optionActions';
+import * as updateDataActions from '../../actions/updateDataActions';
 
 import ModalNewItemOption from './Modal/Modal_New_ItemOption';
 import ModalEditItemOption from './Modal/Modal_Edit_ItemOption';
@@ -28,6 +29,10 @@ class OptionList extends Component {
         this.setState({
             modalEditItemOption: true
         })
+    }
+
+    removeItemOption(optionKey) {
+        this.props.removeItemOption(this.props.project.projectKey, this.props.itemKey, optionKey);
     }
 
     render() {
@@ -60,7 +65,7 @@ class OptionList extends Component {
                             <img src={itemOptions[option].image} height="50px" width="50px" alt={itemOptions[option].title}/>
                             <p></p>
                             <ButtonToolbar>
-                                <Button bsSize="xsmall" bsStyle="danger" onClick={()=>this.setState({ modalDeleteOption: true })}>Delete</Button>
+                                <Button bsSize="xsmall" bsStyle="danger" onClick={()=>this.removeItemOption(option)}>Delete</Button>
                                 <Button bsSize="xsmall" bsStyle="primary" onClick={this.setSelectedOption.bind(this, option)}>Edit</Button>
                             </ButtonToolbar>
                         </Panel>
@@ -85,6 +90,7 @@ function mapStateToProps(state) {
         itemSelected: state.options.selected,
         itemSelectedTitle: state.options.itemTitle,
         itemKey: state.options.itemKey,
+        projectKey: state.project.projectKey,
         options: state.options.data,
         project: state.project
     };
@@ -92,7 +98,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         clearOptionList: () => dispatch(optionActions.clearOptionList()),
-        setSelectedOption: (optionKey) => dispatch(optionActions.setSelectedOption(optionKey))
+        setSelectedOption: (optionKey) => dispatch(optionActions.setSelectedOption(optionKey)),
+        removeItemOption: (projectKey, itemKey, optionKey) => dispatch(updateDataActions.removeItemOption(projectKey, itemKey, optionKey))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(OptionList);

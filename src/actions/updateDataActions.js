@@ -52,6 +52,16 @@ export function addItemOption(projectKey, itemKey, data) {
         itemRefs.child(itemOptionsKey).set(itemOptionsKey)
     }
 }
+export function removeItemOption(projectKey, itemKey, optionKey) {
+    return function() {
+        // Remove ref in item ref
+        const itemRef = firebase.database().ref('projects').child(projectKey).child('categoryItems').child(itemKey).child('refs').child(optionKey);
+        itemRef.remove();
+        // Remove itemOption
+        const itemOptionRef = firebase.database().ref('projects').child(projectKey).child('itemOptions').child(optionKey);
+        itemOptionRef.remove();
+    }
+}
 export function setItemOption(projectKey, optionKey, data) {
     return function() {
         // Create new ref and store option data
