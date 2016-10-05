@@ -112,7 +112,7 @@ class ModalEditItemOption extends Component {
                                              onChange={this.handleAttributeChange}/>
                             </FormGroup>
                             <FormGroup controlId="desc">
-                                <FormControl type="text" placeholder="Description"
+                                <FormControl componentClass="textarea" placeholder="Description"
                                              value={this.state.desc}
                                              onChange={this.handleDescChange}/>
                             </FormGroup>
